@@ -19,7 +19,9 @@ const getAllvideogames = async () => {
     platforms: game.platforms.map((platform) => platform.platform.name),
     releaseDate: game.released,
     rating: game.rating,
+    genres: game.genres.map((genre) => genre.name),
   }));
+
   return [...dataBaseVideogames, ...allgames];
 };
 
