@@ -11,15 +11,19 @@ const getGameByID = async (id) => {
       include: [
         {
           model: Genre,
+          attributes: ["name"],
           through: {
             attributes: [],
           },
         },
       ],
     });
-    if (!game) throw Error("Game not found in Database");
+    const genres = game.genres.map((genre) => genre.name);
+    console.log(genres);
 
-    return game;
+    if (!game) throw Error("Game not found in Database");
+    console.log({ ...game.toJSON(), genres });
+    return { ...game.toJSON(), genres };
   }
   if (!isNaN(id)) {
     const gameData = await axios.get(`${URL}games/${id}?key=${API_KEY}`);
