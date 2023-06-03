@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
         autoIncrement: true,
       },
       name: {
-        type: DataTypes.ENUM("Action", "Adventure", "RPG", "Shooter"),
+        type: DataTypes.STRING,
         allowNull: false,
       },
     },

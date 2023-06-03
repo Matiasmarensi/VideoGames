@@ -4,6 +4,7 @@ const { Router } = require("express");
 const getAllGames = require("../handlers/getAllGames");
 const postVideogame = require("../handlers/postvideogame");
 const getById = require("../handlers/getById");
+const getGenders = require("../handlers/getGenres");
 
 const router = Router();
 
@@ -13,6 +14,6 @@ router.get("/videogames", getAllGames);
 router.get("/videogames/:id", getById);
 // router.get("/videogames/name", getvideogameByName);
 router.post("/videogames", postVideogame);
-// router.get("/genres", getAllGenres);
+router.get("/genres", getGenders);
 
 module.exports = router;
