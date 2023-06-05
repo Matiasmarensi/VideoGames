@@ -18,10 +18,9 @@ const getGameByID = async (id) => {
         },
       ],
     });
+    if (!game) throw Error("Game not found in Database");
     const genres = game.genres.map((genre) => genre.name);
 
-    if (!game) throw Error("Game not found in Database");
-    console.log({ ...game.toJSON(), genres });
     return { ...game.toJSON(), genres };
   }
   if (!isNaN(id)) {
