@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f2f2f2;
+  }
+  
+  .link {
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .link:hover {
+    background-color: #ccc;
+    border-radius: 5px;
+  }
+  
