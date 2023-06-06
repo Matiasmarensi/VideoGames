@@ -17,7 +17,7 @@ const Detail = () => {
 
   console.log(game.genres);
   return (
-    <div>
+    <div className={style.detail}>
       <h2>detail</h2>
       <h2>{game.name}</h2>
       <img src={game.image} alt="asdadasds" />
