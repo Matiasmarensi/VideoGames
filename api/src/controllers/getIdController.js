@@ -25,10 +25,11 @@ const getGameByID = async (id) => {
   }
   if (!isNaN(id)) {
     const gameData = await axios.get(`${URL}games/${id}?key=${API_KEY}`);
+    console.log(gameData.data);
     const gameApi = {
       id,
       name: gameData.data.name,
-      image: gameData.data.image,
+      image: gameData.data.background_image,
       description: gameData.data.description,
       platforms: gameData.data.platforms.map((p) => p.platform.name),
       releaseDate: gameData.data.releaseDate,

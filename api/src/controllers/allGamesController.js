@@ -31,7 +31,7 @@ const getAllvideogames = async (query) => {
       genres: game.genres.map((genre) => genre.name),
     }));
     //y busca en api
-    const ApiVideogames = await axios.get(`${URL}games?key=${API_KEY}&page_size=10&search=${lowerCaseQuery}`);
+    const ApiVideogames = await axios.get(`${URL}games?key=${API_KEY}&page_size=60&search=${lowerCaseQuery}`);
     apiVideogames = ApiVideogames.data.results.map((game) => ({
       id: game.id,
       name: game.name,
@@ -62,7 +62,7 @@ const getAllvideogames = async (query) => {
       genres: game.genres.map((genre) => genre.name),
     }));
     ///en api
-    const ApiVideogames = await axios.get(`${URL}games?key=${API_KEY}&page_size=10`);
+    const ApiVideogames = await axios.get(`${URL}games?key=${API_KEY}&page_size=60`);
     apiVideogames = ApiVideogames.data.results.map((game) => ({
       id: game.id,
       name: game.name,

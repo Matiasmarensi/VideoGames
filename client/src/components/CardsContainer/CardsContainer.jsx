@@ -138,7 +138,15 @@ const CardsContainer = () => {
   return (
     <div className={style.container}>
       {games.map((game) => (
-        <Card key={game.id} name={game.name} image={game.image} />
+        <Card
+          key={game.id}
+          name={game.name}
+          image={game.image}
+          rating={game.rating}
+          releaseDate={game.releaseDate}
+          description={game.description}
+          genres={game.genres}
+        />
       ))}
     </div>
   );
