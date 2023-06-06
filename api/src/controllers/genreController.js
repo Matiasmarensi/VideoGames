@@ -1,16 +1,18 @@
 const axios = require("axios");
-const { Videogame, Genre } = require("../db");
 const { API_KEY, URL } = process.env;
+const { Genre } = require("../db");
 
-const getAllGenres = async () => {
-  const ApiGenres = await axios.get(`${URL}genres?key=${API_KEY}`);
-  let apiGenresData = ApiGenres.data.results;
-  apiGenresData = apiGenresData.map((e) => {
-    return {
-      id: e.id,
-      name: e.name,
-    };
-  });
-  return await Genre.bulkCreate(apiGenresData);
+const getGenres = async () => {
+  const existingGenres = await Genre.findAll();
+  if (existingGenres.length === 0) {
+    const response = await axios.get(`${URL}genres?key=${API_KEY}`);
+    const genres = response.data.results.map((genre) => ({
+      id: genre.id,
+      name: genre.name,
+    }));
+    await Genre.bulkCreate(genres);
+  }
+  return existingGenres;
 };
-module.exports = getAllGenres;
+
+module.exports = getGenres;
