@@ -1,9 +1,17 @@
-import { GET_GAMES, GET_GENRES, GENRE_FILTER, SOURCE_FILTER, ORDER_BY_NAME } from "./actions";
+import {
+  GET_GAMES,
+  GET_GENRES,
+  GENRE_FILTER,
+  SOURCE_FILTER,
+  ORDER_BY_NAME,
+  ORDER_BY_RANKING,
+  CREATED_BY_ME_FILTER,
+} from "./actions";
 
 const initialState = {
   videoGames: [],
   genres: [],
-
+  filteredGames: [],
   genreFilter: "",
 };
 
@@ -14,10 +22,54 @@ const rootReducer = (state = initialState, action) => {
     case GET_GENRES:
       return { ...state, genres: action.payload };
     case GENRE_FILTER:
-      return { ...state, genreFilter: action.payload };
+      const genres = action.payload;
+      const filtered = state.videoGames.filter((game) => {
+        if (genres !== "All") {
+          return game.genres.includes(genres);
+        } else {
+          return state.videoGames;
+        }
+      });
+      return { ...state, filteredGames: filtered };
+    // const genres = action.payload;
+    // if (genres === "All") {
+    //   return {
+    //     ...state,
+    //     filteredGames: state.videoGames,
+    //   };
+    // } else {
+    //   const filtered = state.videoGames.filter((game) => game.genres.includes(genres));
+    //   console.log(filtered);
+
+    //   return {
+    //     ...state,
+    //     filteredGames: filtered,
+    //   };
+    // }
+
+    case ORDER_BY_RANKING:
+      const isAscending = action.payload === "Ascendente";
+      const sortedGamesByRating = [...state.filteredGames].sort((a, b) => {
+        if (isAscending) {
+          return a.rating - b.rating; // Orden ascendente
+        } else {
+          return b.rating - a.rating; // Orden descendente
+        }
+      });
+
+      return {
+        ...state,
+        filteredGames: sortedGamesByRating,
+        orderBy: action.payload,
+      };
+
     case ORDER_BY_NAME:
-      const { videoGames } = state;
-      const sorted = [...videoGames].sort((a, b) => {
+      let aux = state.filteredGames;
+
+      if (aux.length < 1) {
+        aux = state.videoGames;
+      }
+      const sorted = aux.sort((a, b) => {
         if (action.payload === "Ascendente") {
           return a.name.localeCompare(b.name); // Orden ascendente
         } else {
@@ -26,13 +78,14 @@ const rootReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        videoGames: sorted,
+        filteredGames: sorted,
         orderBy: action.payload,
       };
+
     case SOURCE_FILTER:
       return {
         ...state,
-        sourceFilter: action.payload,
+        videoGames: action.payload,
       };
 
     default:

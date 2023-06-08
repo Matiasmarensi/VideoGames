@@ -9,9 +9,17 @@
   justify-content: center;
   margin-bottom: 20px;
 }
-
+.labelgenre{
+  color: #ffffff;
+}
+.labelorder{
+  color: #ffffff;
+}
 .filter,
 .order {
+  margin-right: 10px;
+}
+.ranking{
   margin-right: 10px;
 }
 
