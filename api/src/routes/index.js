@@ -5,6 +5,7 @@ const getAllGames = require("../handlers/getAllGames");
 const postVideogame = require("../handlers/postvideogame");
 const getById = require("../handlers/getById");
 const getGenders = require("../handlers/getGenres");
+const getPlatforms = require("../handlers/getPlatforms");
 
 const router = Router();
 
@@ -15,5 +16,6 @@ router.get("/videogames/:id", getById);
 // router.get("/videogames/name", getvideogameByName);
 router.post("/videogames", postVideogame);
 router.get("/genres", getGenders);
+router.get("/platforms", getPlatforms);
 
 module.exports = router;

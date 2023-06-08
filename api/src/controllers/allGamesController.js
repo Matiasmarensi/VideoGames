@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Videogame, Genre } = require("../db");
+const { Videogame, Genre, Consola } = require("../db");
 const { API_KEY } = process.env;
 const { Op } = require("sequelize");
 // Reemplaza esto con tu API key de RAWG
@@ -18,18 +18,29 @@ const getAllvideogames = async (query) => {
           [Op.iLike]: `%${lowerCaseQuery}%`,
         },
       },
-      include: {
-        model: Genre,
-        attributes: ["name"],
-        through: {
-          attributes: [],
+      include: [
+        {
+          model: Genre,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
         },
-      },
+        {
+          model: Consola,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
     });
     dataBaseVideogames = dataBaseVideogames.map((game) => ({
       ...game.toJSON(),
       genres: game.genres.map((genre) => genre.name),
+      consola: game.consolas.map((consola) => consola.name),
     }));
+
     //y busca en api
     const ApiVideogames = await axios.get(`${URL}games?key=${API_KEY}&page_size=60&search=${lowerCaseQuery}`);
     apiVideogames = ApiVideogames.data.results.map((game) => ({
@@ -49,17 +60,28 @@ const getAllvideogames = async (query) => {
     //busca en bdd
   } else {
     dataBaseVideogames = await Videogame.findAll({
-      include: {
-        model: Genre,
-        attributes: ["name"],
-        through: {
-          attributes: [],
+      include: [
+        {
+          model: Genre,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
         },
-      },
+        {
+          model: Consola,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
     });
+
     dataBaseVideogames = dataBaseVideogames.map((game) => ({
       ...game.toJSON(),
       genres: game.genres.map((genre) => genre.name),
+      consolas: game.consolas.map((consola) => consola.name),
     }));
     ///en api
     const ApiVideogames = await axios.get(`${URL}games?key=${API_KEY}&page_size=60`);
@@ -74,6 +96,7 @@ const getAllvideogames = async (query) => {
       genres: game.genres.map((genre) => genre.name),
     }));
   }
+
   //justa resulados
   const allGames = [...dataBaseVideogames, ...apiVideogames].slice(0, 15);
   return allGames;

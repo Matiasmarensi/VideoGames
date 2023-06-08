@@ -2,10 +2,10 @@ const { Videogame, Genre } = require("../db");
 const postGame = require("../controllers/postGameController");
 
 const postVideogame = async (req, res) => {
-  const { image, name, description, platforms, releaseDate, rating, genres } = req.body;
+  const { image, name, description, platforms, releaseDate, rating, genres, consolas } = req.body;
 
   try {
-    const postedGame = await postGame(image, name, description, platforms, releaseDate, rating, genres);
+    const postedGame = await postGame(image, name, description, platforms, releaseDate, rating, genres, consolas);
 
     return res.status(200).json(postedGame);
   } catch (error) {

@@ -1,7 +1,7 @@
 const { Videogame, Genre } = require("../db");
 const { Op } = require("sequelize");
 
-const postGame = async (image, name, description, platforms, releaseDate, rating, genres) => {
+const postGame = async (image, name, description, platforms, releaseDate, rating, genres, consolas) => {
   const newGame = await Videogame.create({
     image,
     name,
@@ -9,9 +9,11 @@ const postGame = async (image, name, description, platforms, releaseDate, rating
     platforms,
     releaseDate,
     rating,
+    consolas,
   });
 
-  newGame.addGenres(genres);
+  await newGame.addConsolas(consolas);
+  await newGame.addGenres(genres);
 
   return newGame;
 };

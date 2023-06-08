@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Videogame, Genre } = require("../db");
+const { Videogame, Genre, Consola } = require("../db");
 
 const API_KEY = "6f9bcb5437d640988efc49c8ab757774"; // Reemplaza esto con tu API key de RAWG
 
@@ -16,12 +16,21 @@ const getGameByID = async (id) => {
             attributes: [],
           },
         },
+        {
+          model: Consola,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
       ],
     });
+
     if (!game) throw Error("Game not found in Database");
+
     const genres = game.genres.map((genre) => genre.name);
 
-    return { ...game.toJSON(), genres };
+    return { ...game.toJSON(), genres, consolas: game.consolas.map((consola) => consola.name) };
   }
   if (!isNaN(id)) {
     const gameData = await axios.get(`${URL}games/${id}?key=${API_KEY}`);
