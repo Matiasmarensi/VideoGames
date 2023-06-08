@@ -11,7 +11,9 @@ const getGenres = async () => {
       name: genre.name,
     }));
     await Genre.bulkCreate(genres);
+    return existingGenres;
   }
+  console.log(existingGenres);
   return existingGenres;
 };
 
