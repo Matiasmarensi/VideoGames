@@ -22,13 +22,14 @@ const rootReducer = (state = initialState, action) => {
     case GET_GENRES:
       return { ...state, genres: action.payload };
     case GENRE_FILTER:
-      const genres = action.payload;
+      const selectedGenre = action.payload;
       let filtered = [];
+      console.log(selectedGenre);
 
-      if (genres !== "All") {
-        filtered = state.videoGames.filter((game) => game.genres.includes(genres));
+      if (selectedGenre !== "All") {
+        filtered = state.videoGames.filter((game) => game.genres.some((genre) => genre === selectedGenre));
       }
-
+      console.log(filtered);
       return { ...state, filteredGames: filtered };
     // const genres = action.payload;
     // if (genres === "All") {

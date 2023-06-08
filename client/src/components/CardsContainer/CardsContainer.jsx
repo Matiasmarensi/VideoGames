@@ -20,7 +20,6 @@ const CardsContainer = () => {
   const handleGenreChange = (event) => {
     const selected = event.target.value;
     setSelectedGenre(selected);
-    console.log(selected);
   };
   useEffect(() => {
     dispatch(orderGames(orderBy));
@@ -45,7 +44,7 @@ const CardsContainer = () => {
             <option value="All">All</option>
             {genres.map((genre, index) => (
               <option key={index} value={genre.name}>
-                {genre}
+                {genre.name}
               </option>
             ))}
           </select>

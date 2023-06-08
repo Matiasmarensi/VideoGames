@@ -10,6 +10,7 @@ const CreateVideogame = () => {
   useEffect(() => {
     dispatch(getGenres());
   }, []);
+  console.log(genres);
   const [newVideogame, setNewVideogame] = useState({
     name: "",
     description: "",
@@ -20,7 +21,6 @@ const CreateVideogame = () => {
     platforms: [],
     created: true,
   });
-
   const handleChange = (event) => {
     const property = event.target.name;
     let value = event.target.value;
@@ -72,8 +72,8 @@ const CreateVideogame = () => {
           <label>Genres</label>
           <select name="genres" multiple value={newVideogame.genres} onChange={handleChange}>
             {genres.map((genre) => (
-              <option key={genre} value={genre}>
-                {genre}
+              <option key={genre.id} value={genre.id}>
+                {genre.name}
               </option>
             ))}
           </select>

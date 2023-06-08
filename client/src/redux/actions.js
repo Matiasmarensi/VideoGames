@@ -18,7 +18,11 @@ export const getGames = () => {
 export const getGenres = () => {
   return async function (dispatch) {
     const response = await axios.get("http://localhost:3001/genres");
-    const genres = response.data.map((genre) => genre.name);
+    const genres = response.data.map((genre) => ({
+      id: genre.id,
+      name: genre.name,
+    }));
+    console.log(genres);
     dispatch({ type: GET_GENRES, payload: genres });
   };
 };

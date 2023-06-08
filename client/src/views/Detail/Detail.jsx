@@ -15,7 +15,6 @@ const Detail = () => {
     });
   }, []);
 
-  console.log(game.genres);
   return (
     <div className={style.detail}>
       <h2>detail</h2>
