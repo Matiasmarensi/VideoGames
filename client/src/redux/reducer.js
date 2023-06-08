@@ -23,13 +23,12 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, genres: action.payload };
     case GENRE_FILTER:
       const genres = action.payload;
-      const filtered = state.videoGames.filter((game) => {
-        if (genres !== "All") {
-          return game.genres.includes(genres);
-        } else {
-          return state.videoGames;
-        }
-      });
+      let filtered = [];
+
+      if (genres !== "All") {
+        filtered = state.videoGames.filter((game) => game.genres.includes(genres));
+      }
+
       return { ...state, filteredGames: filtered };
     // const genres = action.payload;
     // if (genres === "All") {

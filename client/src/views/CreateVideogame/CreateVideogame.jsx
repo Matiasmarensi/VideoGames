@@ -1,7 +1,15 @@
 import style from "./CreateVideogame.module.css";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import { getGenres } from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
 
 const CreateVideogame = () => {
+  const genres = useSelector((state) => state.genres);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getGenres());
+  }, []);
   const [newVideogame, setNewVideogame] = useState({
     name: "",
     description: "",
@@ -12,21 +20,32 @@ const CreateVideogame = () => {
     platforms: [],
     created: true,
   });
-  const handleChange = (event) => {
-    const properties = event.target.name;
-    const value = event.target.value;
-    setNewVideogame({ ...newVideogame, [properties]: value });
-  };
 
+  const handleChange = (event) => {
+    const property = event.target.name;
+    let value = event.target.value;
+
+    if (property === "platforms") {
+      value = Array.from(event.target.selectedOptions, (option) => option.value);
+    }
+
+    if (property === "genres") {
+      value = Array.from(event.target.selectedOptions, (option) => option.value);
+    }
+
+    setNewVideogame({ ...newVideogame, [property]: value });
+  };
+  const submitHandler = (event) => {
+    event.preventDefault();
+    axios.post("http://localhost:3001/videogames", newVideogame).then((res) => alert("videojuego creado"));
+  };
   return (
     <div className={style.create}>
       CreateVideogame
       <div>
-        <form>
+        <form onSubmit={submitHandler}>
           <label>Name</label>
           <input type="text" placeholder="name" name="name" value={newVideogame.name} onChange={handleChange}></input>
-          {/* <label>Image</label>
-        <input type="text" placeholder="image" value={newVideogame.background_image}></input> */}
           <label>Description</label>
           <input
             type="text"
@@ -44,10 +63,21 @@ const CreateVideogame = () => {
           ></input>
           <label>Rating</label>
           <input placeholder="rating" name="rating" value={newVideogame.rating} onChange={handleChange}></input>
-          {/* <label>Platform</label>
-          <input placeholder="platform" name="platforms" value={newVideogame.platforms} onChange={handleChange}></input>
+          <label>Platform</label>
+          <select name="platforms" multiple value={newVideogame.platforms} onChange={handleChange}>
+            <option value="PC">PC</option>
+            <option value="PlayStation 4">PlayStation 4</option>
+            <option value="Xbox One">Xbox One</option>
+          </select>
           <label>Genres</label>
-          <input placeholder="genres" name="genres" value={newVideogame.genres} onChange={handleChange}></input> */}
+          <select name="genres" multiple value={newVideogame.genres} onChange={handleChange}>
+            {genres.map((genre) => (
+              <option key={genre} value={genre}>
+                {genre}
+              </option>
+            ))}
+          </select>
+          <button type="submit">Create</button>
         </form>
       </div>
     </div>
@@ -55,3 +85,8 @@ const CreateVideogame = () => {
 };
 
 export default CreateVideogame;
+
+{
+  /* <label>Image</label>
+<input type="text" placeholder="image" value={newVideogame.background_image}></input> */
+}
