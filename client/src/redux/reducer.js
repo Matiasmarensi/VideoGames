@@ -6,6 +6,8 @@ import {
   ORDER_BY_NAME,
   ORDER_BY_RANKING,
   CREATED_BY_ME_FILTER,
+  GET_PLATFORMS,
+  PLATFORM_FILTER,
 } from "./actions";
 
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
   genres: [],
   filteredGames: [],
   genreFilter: "",
+  platforms: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -24,28 +27,11 @@ const rootReducer = (state = initialState, action) => {
     case GENRE_FILTER:
       const selectedGenre = action.payload;
       let filtered = [];
-      console.log(selectedGenre);
 
       if (selectedGenre !== "All") {
         filtered = state.videoGames.filter((game) => game.genres.some((genre) => genre === selectedGenre));
       }
-      console.log(filtered);
       return { ...state, filteredGames: filtered };
-    // const genres = action.payload;
-    // if (genres === "All") {
-    //   return {
-    //     ...state,
-    //     filteredGames: state.videoGames,
-    //   };
-    // } else {
-    //   const filtered = state.videoGames.filter((game) => game.genres.includes(genres));
-    //   console.log(filtered);
-
-    //   return {
-    //     ...state,
-    //     filteredGames: filtered,
-    //   };
-    // }
 
     case ORDER_BY_RANKING:
       const isAscending = action.payload === "Ascendente";
@@ -81,6 +67,24 @@ const rootReducer = (state = initialState, action) => {
         filteredGames: sorted,
         orderBy: action.payload,
       };
+    case GET_PLATFORMS:
+      return {
+        ...state,
+        platforms: action.payload,
+      };
+    case PLATFORM_FILTER:
+      const selectedPlatform = action.payload;
+      let filteredByPlatform = [];
+
+      if (selectedPlatform !== "All") {
+        filteredByPlatform = state.videoGames.filter(
+          (game) => game.platforms && game.platforms.some((platform) => platform === selectedPlatform)
+        );
+      }
+      return {
+        ...state,
+        filteredGames: filteredByPlatform,
+      };
 
     case SOURCE_FILTER:
       return {
@@ -93,3 +97,18 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 export default rootReducer;
+// const genres = action.payload;
+// if (genres === "All") {
+//   return {
+//     ...state,
+//     filteredGames: state.videoGames,
+//   };
+// } else {
+//   const filtered = state.videoGames.filter((game) => game.genres.includes(genres));
+//   console.log(filtered);
+
+//   return {
+//     ...state,
+//     filteredGames: filtered,
+//   };
+// }

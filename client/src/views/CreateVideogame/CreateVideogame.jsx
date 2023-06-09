@@ -18,7 +18,7 @@ const CreateVideogame = () => {
     releaseDate: "",
     rating: "",
     genres: [],
-    platforms: [],
+    consolas: [],
     created: true,
   });
   const handleChange = (event) => {

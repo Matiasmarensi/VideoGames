@@ -30,7 +30,7 @@ const getGameByID = async (id) => {
 
     const genres = game.genres.map((genre) => genre.name);
 
-    return { ...game.toJSON(), genres, consolas: game.consolas.map((consola) => consola.name) };
+    return { ...game.toJSON(), genres, platforms: game.consolas.map((consola) => consola.name) };
   }
   if (!isNaN(id)) {
     const gameData = await axios.get(`${URL}games/${id}?key=${API_KEY}`);

@@ -8,7 +8,7 @@ const getPlatforms = async () => {
 
   if (platformsBdd.length === 0) {
     const response = await axios.get(`${URLPLATFORM}?key=${API_KEY}`);
-    console.log(response);
+
     const plataformas = response.data.results.map((plat) => ({
       id: plat.id,
       name: plat.name,
