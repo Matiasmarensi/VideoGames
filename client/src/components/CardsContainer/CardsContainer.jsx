@@ -9,14 +9,17 @@ const CardsContainer = () => {
   const genres = useSelector((state) => state.genres);
   const availableGenres = genres.filter((genre) => games.some((game) => game.genres.includes(genre.name)));
   const platforms = useSelector((state) => state.platforms);
-  console.log(games);
+
+  const availablePlatforms = platforms.filter((platform) =>
+    games.some((game) => game.platforms.includes(platform.name))
+  );
   const filteredGames = useSelector((state) => state.filteredGames);
 
   const dispatch = useDispatch();
   const [selectedGenre, setSelectedGenre] = useState("All");
   const [orderBy, setOrderBy] = useState("");
   const [selectedPlatform, setSelectedPlatform] = useState("All");
-
+  console.log(games);
   useEffect(() => {
     dispatch(setGenreFilter(selectedGenre));
   }, [selectedGenre]);
@@ -69,7 +72,7 @@ const CardsContainer = () => {
           <label className={style.labelplatform}>Platform: </label>
           <select onChange={handleChangePlatform}>
             <option value="All">All</option>
-            {platforms.map((platforms, index) => (
+            {availablePlatforms.map((platforms, index) => (
               <option key={index} value={platforms.name}>
                 {platforms.name}
               </option>

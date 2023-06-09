@@ -1,16 +1,20 @@
 import style from "./CreateVideogame.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { getGenres } from "../../redux/actions";
+import { getGenres, getPlatforms } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 
 const CreateVideogame = () => {
   const genres = useSelector((state) => state.genres);
+  const platforms = useSelector((state) => state.platforms);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getGenres());
   }, []);
-  console.log(genres);
+  useEffect(() => {
+    dispatch(getPlatforms());
+  }, []);
+  console.log(platforms);
   const [newVideogame, setNewVideogame] = useState({
     name: "",
     description: "",
@@ -18,7 +22,7 @@ const CreateVideogame = () => {
     releaseDate: "",
     rating: "",
     genres: [],
-    consolas: [],
+    platforms: [],
     created: true,
   });
   const handleChange = (event) => {
@@ -65,9 +69,11 @@ const CreateVideogame = () => {
           <input placeholder="rating" name="rating" value={newVideogame.rating} onChange={handleChange}></input>
           <label>Platform</label>
           <select name="platforms" multiple value={newVideogame.platforms} onChange={handleChange}>
-            <option value="PC">PC</option>
-            <option value="PlayStation 4">PlayStation 4</option>
-            <option value="Xbox One">Xbox One</option>
+            {platforms.map((genre) => (
+              <option key={genre.id} value={genre.id}>
+                {genre.name}
+              </option>
+            ))}
           </select>
           <label>Genres</label>
           <select name="genres" multiple value={newVideogame.genres} onChange={handleChange}>
