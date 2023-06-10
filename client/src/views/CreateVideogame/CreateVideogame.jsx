@@ -14,7 +14,7 @@ const CreateVideogame = () => {
   useEffect(() => {
     dispatch(getPlatforms());
   }, []);
-  console.log(platforms);
+
   const [newVideogame, setNewVideogame] = useState({
     name: "",
     description: "",

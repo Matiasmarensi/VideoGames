@@ -5,11 +5,23 @@ import Home from "./views/Home/Home";
 import Landing from "./views/Landing/Landing";
 import Detail from "./views/Detail/Detail";
 import CreateVideogame from "./views/CreateVideogame/CreateVideogame";
-import Navbar from "./components/NavBar";
+import Navbar from "./components/NavBar/NavBar";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getGames, getGenres, getPlatforms } from "./redux/actions";
 
 function App() {
+  const dispatch = useDispatch();
   const location = useLocation();
-
+  useEffect(() => {
+    dispatch(getGames());
+  }, []);
+  useEffect(() => {
+    dispatch(getGenres());
+  }, []);
+  useEffect(() => {
+    dispatch(getPlatforms());
+  }, []);
   return (
     <div className="App">
       {location.pathname !== "/" && <Navbar />}

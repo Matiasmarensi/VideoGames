@@ -8,6 +8,7 @@ export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_RANKING = "ORDER_BY_RATING";
 export const GET_PLATFORMS = "GET_PLATFORMS";
 export const PLATFORM_FILTER = "PLATFORM_FILTER";
+export const GET_GAMES_BY_NAME = "GET_GAMES_BY_NAME";
 
 // export const CREATED_BY_ME_FILTER = "CREATED_BY_ME_FILTER";
 export const getGames = () => {
@@ -15,6 +16,14 @@ export const getGames = () => {
     const response = await axios.get("http://localhost:3001/videogames");
     const games = response.data;
     dispatch({ type: GET_GAMES, payload: games });
+  };
+};
+export const getGamesByQuery = (name) => {
+  return async function (dispatch) {
+    const response = await axios.get(`http://localhost:3001/videogames?name=${name}`);
+    const games = response.data;
+
+    dispatch({ type: GET_GAMES_BY_NAME, payload: games });
   };
 };
 export const getGenres = () => {

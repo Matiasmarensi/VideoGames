@@ -7,6 +7,7 @@ import {
   ORDER_BY_RANKING,
   CREATED_BY_ME_FILTER,
   GET_PLATFORMS,
+  GET_GAMES_BY_NAME,
   PLATFORM_FILTER,
 } from "./actions";
 
@@ -22,6 +23,8 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_GAMES:
       return { ...state, videoGames: action.payload };
+    case GET_GAMES_BY_NAME:
+      return { ...state, videoGames: action.payload };
     case GET_GENRES:
       return { ...state, genres: action.payload };
     case GENRE_FILTER:
@@ -30,9 +33,11 @@ const rootReducer = (state = initialState, action) => {
 
       if (selectedGenre !== "All") {
         filtered = state.videoGames.filter((game) => game.genres.some((genre) => genre === selectedGenre));
+      } else {
+        filtered = [...state.videoGames];
       }
-      return { ...state, filteredGames: filtered };
 
+      return { ...state, filteredGames: filtered };
     case ORDER_BY_RANKING:
       const isAscending = action.payload === "Ascendente";
       const sortedGamesByRating = [...state.filteredGames].sort((a, b) => {

@@ -2,24 +2,28 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "../Card/Card";
 import style from "./CardsContainer.module.css";
-import { setPlatformFilter, setGenreFilter, orderGames, orderGamesRating } from "../../redux/actions";
-
+import {
+  getGamesByName,
+  setPlatformFilter,
+  setGenreFilter,
+  orderGames,
+  orderGamesRating,
+  getGames,
+} from "../../redux/actions";
+////////////////////////////////////////////////////////
 const CardsContainer = () => {
   const games = useSelector((state) => state.videoGames);
   const genres = useSelector((state) => state.genres);
-  const availableGenres = genres.filter((genre) => games.some((game) => game.genres.includes(genre.name)));
   const platforms = useSelector((state) => state.platforms);
 
-  const availablePlatforms = platforms.filter((platform) =>
-    games.some((game) => game.platforms.includes(platform.name))
-  );
   const filteredGames = useSelector((state) => state.filteredGames);
 
   const dispatch = useDispatch();
   const [selectedGenre, setSelectedGenre] = useState("All");
   const [orderBy, setOrderBy] = useState("");
   const [selectedPlatform, setSelectedPlatform] = useState("All");
-  console.log(games);
+
+  //filtro genres
   useEffect(() => {
     dispatch(setGenreFilter(selectedGenre));
   }, [selectedGenre]);
@@ -28,6 +32,7 @@ const CardsContainer = () => {
     const selected = event.target.value;
     setSelectedGenre(selected);
   };
+  //filtro platforms
   useEffect(() => {
     dispatch(setPlatformFilter(selectedPlatform));
   }, [selectedPlatform]);
@@ -36,7 +41,7 @@ const CardsContainer = () => {
     const selected = event.target.value;
     setSelectedPlatform(selected);
   };
-
+  //order by name
   useEffect(() => {
     dispatch(orderGames(orderBy));
   }, [orderBy]);
@@ -45,6 +50,7 @@ const CardsContainer = () => {
     const selectedOrder = event.target.value;
     setOrderBy(selectedOrder);
   };
+  // order by rankig
   useEffect(() => {
     dispatch(orderGamesRating(orderBy));
   }, [orderBy]);
@@ -53,6 +59,7 @@ const CardsContainer = () => {
     const rating = event.target.value;
     setOrderBy(rating);
   };
+  //////////////////////////////////
 
   return (
     <div className={style.container}>
@@ -61,7 +68,7 @@ const CardsContainer = () => {
           <label className={style.labelgenre}>Genres:</label>
           <select onChange={handleGenreChange}>
             <option value="All">All</option>
-            {availableGenres.map((genre, index) => (
+            {genres.map((genre, index) => (
               <option key={index} value={genre.name}>
                 {genre.name}
               </option>
@@ -72,9 +79,9 @@ const CardsContainer = () => {
           <label className={style.labelplatform}>Platform: </label>
           <select onChange={handleChangePlatform}>
             <option value="All">All</option>
-            {availablePlatforms.map((platforms, index) => (
-              <option key={index} value={platforms.name}>
-                {platforms.name}
+            {platforms.map((platform, index) => (
+              <option key={index} value={platform.name}>
+                {platform.name}
               </option>
             ))}
           </select>
@@ -82,8 +89,8 @@ const CardsContainer = () => {
         <div className={style.order}>
           <label className={style.labelorder}>Order by Name:</label>
           <select onChange={handleOrderChange}>
-            <option value="Ascendente">Ascendente</option>
-            <option value="Descendente">Descendente</option>
+            <option value="Ascendente">Z-A</option>
+            <option value="Descendente">A-Z</option>
           </select>
         </div>
         <div className={style.rating}>
@@ -95,36 +102,39 @@ const CardsContainer = () => {
         </div>
       </div>
       <div className={style.cards}>
-        {filteredGames.length
-          ? filteredGames.map((game) => (
-              <Card
-                id={game.id}
-                key={game.id}
-                name={game.name}
-                image={game.image}
-                rating={game.rating}
-                releaseDate={game.releaseDate}
-                description={game.description}
-                genres={game.genres}
-              />
-            ))
-          : games.map((game) => {
-              return (
-                <Card
-                  id={game.id}
-                  key={game.id}
-                  name={game.name}
-                  image={game.image}
-                  rating={game.rating}
-                  releaseDate={game.releaseDate}
-                  description={game.description}
-                  genres={game.genres}
-                />
-              );
-            })}
+        {filteredGames !== null && filteredGames.length > 0 ? (
+          filteredGames.map((game) => (
+            <Card
+              id={game.id}
+              key={game.id}
+              name={game.name}
+              image={game.image}
+              rating={game.rating}
+              releaseDate={game.releaseDate}
+              description={game.description}
+              genres={game.genres}
+            />
+          ))
+        ) : (
+          <div>No se encontraron juegos.</div>
+        )}
       </div>
     </div>
   );
 };
 
 export default CardsContainer;
+// Array.isArray(games) && games.length > 0 ? (
+//   games.map((game) => (
+//     <Card
+//       id={game.id}
+//       key={game.id}
+//       name={game.name}
+//       image={game.image}
+//       rating={game.rating}
+//       releaseDate={game.releaseDate}
+//       description={game.description}
+//       genres={game.genres}
+//     />
+//   ))
+// )
