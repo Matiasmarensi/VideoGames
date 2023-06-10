@@ -11,7 +11,7 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-router.get("/videogames", getAllGames);
+router.get("/videogames/", getAllGames);
 router.get("/videogames/:id", getById);
 // router.get("/videogames/name", getvideogameByName);
 router.post("/videogames", postVideogame);

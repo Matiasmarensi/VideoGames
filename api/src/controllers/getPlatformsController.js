@@ -18,7 +18,7 @@ const getPlatforms = async () => {
 
     return plataformas; // Devolver las plataformas en lugar de platformsBdd
   }
-  console.log(platformsBdd);
+
   return platformsBdd;
 };
 

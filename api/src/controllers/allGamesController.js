@@ -42,17 +42,19 @@ const getAllvideogames = async (query) => {
     }));
 
     //y busca en api
-    const ApiVideogames = await axios.get(`${URL}games?key=${API_KEY}&page_size=60&search=${lowerCaseQuery}`);
-    apiVideogames = ApiVideogames.data.results.map((game) => ({
-      id: game.id,
-      name: game.name,
-      image: game.background_image,
-      description: game.description,
-      platforms: game.platforms.map((platform) => platform.platform.name),
-      releaseDate: game.released,
-      rating: game.rating,
-      genres: game.genres.map((genre) => genre.name),
-    }));
+    const ApiVideogames = await axios.get(`${URL}games?key=${API_KEY}&page_size=22&search=${lowerCaseQuery}`);
+    apiVideogames = ApiVideogames.data.results
+      .map((game) => ({
+        id: game.id,
+        name: game.name,
+        image: game.background_image,
+        description: game.description,
+        platforms: game.platforms.map((platform) => platform.platform.name),
+        releaseDate: game.released,
+        rating: game.rating,
+        genres: game.genres.map((genre) => genre.name),
+      }))
+      .slice(0, 15);
 
     if (dataBaseVideogames.length === 0 && apiVideogames.length === 0) {
       throw new Error(`No se encontró ningún videojuego con el nombre "${query}".`);
@@ -84,7 +86,7 @@ const getAllvideogames = async (query) => {
       platforms: game.consolas.map((platforms) => platforms.name),
     }));
     ///en api
-    const ApiVideogames = await axios.get(`${URL}games?key=${API_KEY}&page_size=60`);
+    const ApiVideogames = await axios.get(`${URL}games?key=${API_KEY}&page_size=22`);
     apiVideogames = ApiVideogames.data.results.map((game) => ({
       id: game.id,
       name: game.name,
