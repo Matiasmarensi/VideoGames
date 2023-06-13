@@ -6,7 +6,7 @@ const postVideogame = require("../handlers/postvideogame");
 const getById = require("../handlers/getById");
 const getGenders = require("../handlers/getGenres");
 const getPlatforms = require("../handlers/getPlatforms");
-
+const deleteGame = require("../handlers/deleteById");
 const router = Router();
 
 // Configurar los routers
@@ -17,5 +17,5 @@ router.get("/videogames/:id", getById);
 router.post("/videogames", postVideogame);
 router.get("/genres", getGenders);
 router.get("/platforms", getPlatforms);
-
+router.delete("/videogames/:id", deleteGame);
 module.exports = router;

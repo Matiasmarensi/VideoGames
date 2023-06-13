@@ -57,7 +57,8 @@ const getAllvideogames = async (query) => {
       .slice(0, 15);
 
     if (dataBaseVideogames.length === 0 && apiVideogames.length === 0) {
-      throw new Error(`No se encontró ningún videojuego con el nombre "${query}".`);
+      // throw new Error(`No se encontró ningún videojuego con el nombre "${query}".`);
+      return null;
     }
     //busca en bdd
   } else {
