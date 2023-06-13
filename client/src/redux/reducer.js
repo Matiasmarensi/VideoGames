@@ -5,10 +5,12 @@ import {
   SOURCE_FILTER,
   ORDER_BY_NAME,
   ORDER_BY_RANKING,
-  CREATED_BY_ME_FILTER,
   GET_PLATFORMS,
   GET_GAMES_BY_NAME,
   PLATFORM_FILTER,
+  GET_GAME_BY_ID,
+  DELETE_GAME,
+  POST_GAME,
 } from "./actions";
 
 const initialState = {
@@ -17,6 +19,8 @@ const initialState = {
   filteredGames: [],
   genreFilter: "",
   platforms: [],
+  game: [],
+  sourceFilter: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -24,7 +28,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_GAMES:
       return { ...state, videoGames: action.payload };
     case GET_GAMES_BY_NAME:
-      return { ...state, videoGames: action.payload };
+      return { ...state, filteredGames: action.payload };
     case GET_GENRES:
       return { ...state, genres: action.payload };
     case GENRE_FILTER:
@@ -85,16 +89,55 @@ const rootReducer = (state = initialState, action) => {
         filteredByPlatform = state.videoGames.filter(
           (game) => game.platforms && game.platforms.some((platform) => platform === selectedPlatform)
         );
-      }
+      } else
+        return {
+          ...state,
+          filteredGames: state.videoGames,
+        };
       return {
         ...state,
         filteredGames: filteredByPlatform,
       };
 
     case SOURCE_FILTER:
+      const created = action.payload;
+      let filteredBySource = [];
+
+      if (created === "true") {
+        filteredBySource = state.videoGames.filter((game) => game.created === true);
+      } else if (created === "false") {
+        filteredBySource = state.videoGames.filter((game) => game.created === undefined);
+      } else {
+        filteredBySource = [...state.videoGames];
+      }
+
       return {
         ...state,
-        videoGames: action.payload,
+        filteredGames: filteredBySource,
+      };
+    case GET_GAME_BY_ID:
+      let sourceFilter = [];
+      let source = action.payload;
+      if (source === "Created") {
+        sourceFilter = state.filtered.filter((game) => game.created === true);
+      }
+      if (source === "Api") {
+        sourceFilter = state.filtered.filter((game) => game.created === false);
+      }
+      return {
+        ...state,
+        sourceFilter: sourceFilter,
+      };
+    case DELETE_GAME:
+      return {
+        ...state,
+        filteredGames: state.videoGames.filter((game) => game.id !== action.payload),
+      };
+    case POST_GAME:
+      return {
+        ...state,
+        videoGames: [...state.videoGames, action.payload],
+        filteredGames: [...state.filteredGames, action.payload],
       };
 
     default:

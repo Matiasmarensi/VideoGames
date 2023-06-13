@@ -7,22 +7,22 @@ const Search = () => {
   const dispatch = useDispatch();
   const [gameSearch, setGameSearch] = useState("");
 
-  useEffect(() => {
-    dispatch(getGamesByQuery(gameSearch || ""));
-  }, [gameSearch]);
-
   const handleSearch = (e) => {
     const gameSearch = e.target.value;
     e.preventDefault();
-    if (!e) {
-      setGameSearch("");
-    }
     setGameSearch(gameSearch);
   };
 
+  const handleSearchClick = () => {
+    dispatch(getGamesByQuery(gameSearch));
+  };
+
+  console.log(gameSearch);
+
   return (
     <div className={style.container}>
-      <input className={style.input} value={gameSearch} type="text" onChange={handleSearch} /> <button>Buscar</button>
+      <input className={style.input} type="text" onChange={handleSearch} />
+      <button onClick={handleSearchClick}>Buscar</button>
     </div>
   );
 };

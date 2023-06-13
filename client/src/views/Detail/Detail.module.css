@@ -1,0 +1,69 @@
+.container {
+    background: linear-gradient(135deg, #ff6f00, #ff4081);
+    background-size: cover;
+    margin-top: -20px;
+    padding: auto;
+    min-height:100vh;
+    padding-bottom: 20px;
+  }
+.name {
+    padding-top: 20px;
+   
+    text-align: center;
+    color: #fff;
+    
+  }
+  
+.image {
+    width: 500px;
+    height: auto;
+    margin-bottom: 2px;
+    border-radius: 61px;
+    box-shadow: 0 12px 2px rgba(0, 0, 0, 0.2);
+  }
+.data {
+    background: linear-gradient(135deg, #ff6f00, #ff4081);
+
+    
+   
+  }
+  
+  .rating {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #237878;
+  }
+  
+  .description {
+    margin-bottom: 10px;
+    padding: 9px;
+    margin-right: 20px;
+    margin-left: 20px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
+    
+    border-radius: 8px;
+    box-shadow: 0 9px 4px rgba(0, 0, 0, 0.2);
+ 
+  
+ 
+  
+  }
+  
+ 
+  
+  .platforms, .genres {
+  
+  }
+  
+  .platforms div, .genres div {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 4px 8px;
+    margin: 2px;
+    background: linear-gradient(135deg, #3f51b5, #00bcd4);
+    border-radius: 4px;
+    font-size: 18px;
+    color: #fff;
+  }
+  

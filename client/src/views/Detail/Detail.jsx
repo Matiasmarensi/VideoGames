@@ -1,32 +1,68 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import style from "./Detail.module.css";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getGameById } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Detail = () => {
   const { id } = useParams();
-  const [game, setGame] = useState({});
+  const dispatch = useDispatch();
+  const game = useSelector((state) => state.game);
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/videogames/${id}`).then((res) => {
-      const game = res.data;
-      setGame(game);
-    });
-  }, []);
+    dispatch(getGameById(id));
+    return () => {
+      dispatch(getGameById(""));
+    };
+  }, [id]);
+
+  // const handleShowMore = () => {
+  //   setShowFullDescription(true);
+  // };
 
   return (
-    <div className={style.detail}>
-      <h2>detail</h2>
-      <h2>{game.name}</h2>
-      <img src={game.image} alt="asdadasds" />
-      <h2>{game.rating}</h2>
-      <h2>{game.genres}</h2>
-      <h2>{game.description}</h2>
-      <h2>{game.platforms}</h2>
-      <h2>{game.genres}</h2>
+    <div className={style.container}>
+      <div className={style.detail}>
+        <h2 className={style.name}>{game.name}</h2>
+        <img className={style.image} src={game.image} alt="asdadasds" />
+        <div className={style.data}>
+          <h2 className={style.rating}>Rating: {game.rating}</h2>
+          <div className={style.description} dangerouslySetInnerHTML={{ __html: game.description }}></div>
+          <div className={style.platforms}>
+            Platforms:{" "}
+            {game.platforms?.map((platform) => (
+              <div key={platform}>{platform}</div>
+            ))}
+          </div>
+          <div className={style.genres}>
+            Genres:{" "}
+            {game.genres?.map((genre) => (
+              <div key={genre}>{genre}</div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Detail;
+
+{
+  /* <div className={style.description}>
+  {showFullDescription ? (
+    <div dangerouslySetInnerHTML={{ __html: game.description }}></div>
+  ) : (
+    <div>
+      {game.description?.slice(0, 100)}
+      {!showFullDescription && game.description?.length > 100 && (
+        <button className={style.showMoreButton} onClick={handleShowMore}>
+          Ver más
+        </button>
+      )}
+    </div>
+  )}
+</div> */
+}

@@ -1,7 +1,7 @@
 import style from "./CreateVideogame.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { getGenres, getPlatforms } from "../../redux/actions";
+import { getGenres, getPlatforms, createVideogame } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 
 const CreateVideogame = () => {
@@ -41,7 +41,7 @@ const CreateVideogame = () => {
   };
   const submitHandler = (event) => {
     event.preventDefault();
-    axios.post("http://localhost:3001/videogames", newVideogame).then((res) => alert("videojuego creado"));
+    dispatch(createVideogame(newVideogame));
   };
   return (
     <div className={style.create}>
@@ -60,6 +60,7 @@ const CreateVideogame = () => {
           ></input>
           <label>Release Date</label>
           <input
+            type="date"
             placeholder="release date"
             name="releaseDate"
             value={newVideogame.releaseDate}
