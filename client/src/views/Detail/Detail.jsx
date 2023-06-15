@@ -9,7 +9,6 @@ const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const game = useSelector((state) => state.game);
-  const [showFullDescription, setShowFullDescription] = useState(false);
 
   useEffect(() => {
     dispatch(getGameById(id));
@@ -21,10 +20,10 @@ const Detail = () => {
   // const handleShowMore = () => {
   //   setShowFullDescription(true);
   // };
-
+  console.log(game);
   return (
-    <div className={style.container}>
-      <div className={style.detail}>
+    <div className={style.detail}>
+      <div className={style.container}>
         <h2 className={style.name}>{game.name}</h2>
         <img className={style.image} src={game.image} alt="asdadasds" />
         <div className={style.data}>

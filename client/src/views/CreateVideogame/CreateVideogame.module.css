@@ -1,0 +1,75 @@
+.create {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .form {
+    margin-top: 20px;
+  }
+  
+  .formContainer {
+    gap: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .column {
+    display: table;
+    grid-template-columns: repeat(3, 1fr); /* Cambiamos a tres columnas */
+    gap: 6px;
+  }
+  
+  .columnItem {
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  input[type="number"] {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .scrollable {
+    max-height: 333px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+  
+  .button {
+    margin: 10px;
+    margin-top: 15%;
+    align-self:flex-start;
+  }
+  
+  .button button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Modificaciones */
+  .columnItem1 {
+    margin-bottom: 10px;
+    justify-self: start;
+  }
+  
+  .columnItem2 {
+    margin-bottom: 10px;
+    justify-self: start;
+  }
+  

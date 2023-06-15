@@ -116,18 +116,11 @@ const rootReducer = (state = initialState, action) => {
         filteredGames: filteredBySource,
       };
     case GET_GAME_BY_ID:
-      let sourceFilter = [];
-      let source = action.payload;
-      if (source === "Created") {
-        sourceFilter = state.filtered.filter((game) => game.created === true);
-      }
-      if (source === "Api") {
-        sourceFilter = state.filtered.filter((game) => game.created === false);
-      }
       return {
         ...state,
-        sourceFilter: sourceFilter,
+        game: action.payload,
       };
+
     case DELETE_GAME:
       return {
         ...state,
@@ -145,18 +138,3 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 export default rootReducer;
-// const genres = action.payload;
-// if (genres === "All") {
-//   return {
-//     ...state,
-//     filteredGames: state.videoGames,
-//   };
-// } else {
-//   const filtered = state.videoGames.filter((game) => game.genres.includes(genres));
-//   console.log(filtered);
-
-//   return {
-//     ...state,
-//     filteredGames: filtered,
-//   };
-// }
