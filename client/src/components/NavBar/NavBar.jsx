@@ -9,7 +9,7 @@ const NavBar = () => {
       <Link to="/home" className={style.link}>
         Home
       </Link>
-      <div>{location.pathname === "/home" && <Search />}</div>
+      <div className={style.search}>{location.pathname === "/home" && <Search />}</div>
 
       <Link to="/create" className={style.link}>
         Create

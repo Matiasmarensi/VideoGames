@@ -19,7 +19,6 @@ const Home = () => {
 
   return (
     <div className={style.container}>
-      <h1 className={style.title}>Home de videojuegos</h1>
       <CardsConainter />
     </div>
   );

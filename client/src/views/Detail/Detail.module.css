@@ -1,14 +1,16 @@
 .container {
-    background: linear-gradient(135deg, #ff6f00, #ff4081);
+  background-image: url('https://images.unsplash.com/photo-1592659762303-90081d34b277?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGNifGVufDB8fDB8fHww&w=1000&q=80');
     background-size: cover;
-    margin-top: -20px;
+    margin-top: 0px;
     padding: auto;
     min-height:100vh;
     padding-bottom: 20px;
+    padding-top: 20px;
   }
+  @import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
 .name {
     padding-top: 20px;
-   
+    font-family: Electrolize;
     text-align: center;
     color: #fff;
     
@@ -19,10 +21,10 @@
     height: auto;
     margin-bottom: 2px;
     border-radius: 61px;
-    box-shadow: 0 12px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 10px 12px 21px rgba(0, 0, 0.2, 0.7);
   }
 .data {
-    background: linear-gradient(135deg, #ff6f00, #ff4081);
+   
 
     
    
@@ -49,10 +51,20 @@
  
   
   }
-  
+  .rating{
+    display: inline-block;
+    margin-right: 5px;
+    padding: 4px 8px;
+    margin: 2px;
+    background: linear-gradient(135deg, #e4c812, #d5e33a);
+    border-radius: 4px;
+    font-size: 18px;
+    color: #fff;
+  }
  
   
   .platforms, .genres {
+    color: #fff;
   
   }
   

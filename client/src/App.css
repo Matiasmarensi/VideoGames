@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  background-image: url('https://singularityhub.com/wp-content/uploads/2018/10/concept-circuit-board-blue-orange-shutterstock_703395397.jpg');
+  
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+ 
 }
 
 .App-logo {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "../Card/Card";
+
 import style from "./CardsContainer.module.css";
 import {
   getGamesByQuery,
@@ -26,6 +27,17 @@ const CardsContainer = () => {
   const [selectedPlatform, setSelectedPlatform] = useState("All");
   const [search, setSearch] = useState("");
   const [source, setSource] = useState("");
+  const [page, setPage] = useState(1);
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
+
   useEffect(() => {
     dispatch(sourceFilter(source));
   }, [source]);
@@ -75,13 +87,28 @@ const CardsContainer = () => {
     setOrderBy(rating);
   };
   //////////////////////////////////
+  const goToPreviousPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
 
+  // Función para ir a la página siguiente
+  const goToNextPage = () => {
+    if (page < Math.ceil(filteredGames.length / 15)) {
+      setPage(page + 1);
+    }
+  };
   return (
     <div className={style.container}>
       <div className={style.filters}>
         <div className={style.filter}>
-          <label className={style.labelgenre}>Genres:</label>
+          {/* <label className={style.labelgenre}>Genres:</label> */}
           <select className={style.select} onChange={handleGenreChange}>
+            <option disabled selected>
+              {" "}
+              Genres{" "}
+            </option>
             <option value="All">All</option>
             {genres.map((genre, index) => (
               <option key={index} value={genre.name}>
@@ -91,9 +118,14 @@ const CardsContainer = () => {
           </select>
         </div>
         <div className={style.filterplatform}>
-          <label className={style.labelplatform}>Platform: </label>
+          {/* <label className={style.labelplatform}>Platform: </label> */}
           <select className={style.select} onChange={handleChangePlatform}>
+            <option disabled selected>
+              {" "}
+              Platforms{" "}
+            </option>
             <option value="All">All</option>
+
             {platforms.map((platform, index) => (
               <option key={index} value={platform.name}>
                 {platform.name}
@@ -102,44 +134,80 @@ const CardsContainer = () => {
           </select>
         </div>
         <div className={style.order}>
-          <label className={style.labelorder}>Order by Name:</label>
+          {/* <label className={style.labelorder}>Order by Name:</label> */}
           <select className={style.select} onChange={handleOrderChange}>
+            <option disabled selected>
+              Order by Name
+            </option>
             <option value="Ascendente">Z-A</option>
             <option value="Descendente">A-Z</option>
           </select>
         </div>
         <div className={style.rating}>
-          <label className={style.labelorder}>Order by Ranking:</label>
+          {/* <label className={style.labelorder}>Order by Ranking:</label> */}
           <select className={style.select} onChange={handleRatingChange}>
+            <option disabled selected>
+              Order by Ranking
+            </option>
             <option value="Ascendente">Ascendente</option>
             <option value="Descendente">Descendente</option>
           </select>
-          <label className={style.labelgenre}>Source:</label>
+          {/* <label className={style.labelgenre}>Source:</label> */}
+
           <select className={style.select} onChange={handleSourceFilter} value={source}>
+            <option disabled selected>
+              Source
+            </option>
             <option value="All">All</option>
             <option value="true">Created</option>
             <option value="false">Not Created</option>
           </select>
         </div>
       </div>
-      <div className={style.cards}>
-        {filteredGames !== null && filteredGames.length > 0 ? (
-          filteredGames.map((game, i) => (
-            <Card
-              key={i}
-              id={game.id}
-              name={game.name}
-              image={game.image}
-              rating={game.rating}
-              releaseDate={game.releaseDate}
-              description={game.description}
-              genres={game.genres}
-              created={game.created}
-            />
-          ))
-        ) : (
-          <div className={style.noGames}>No se encontraron juegos.</div>
-        )}
+      <div className={style.pagination}>
+        <button onClick={goToPreviousPage} disabled={page === 1}>
+          🢀
+        </button>
+        <span>Page {page}</span>
+        <button onClick={goToNextPage} disabled={page === Math.ceil(filteredGames.length / 15)}>
+          🢂
+        </button>
+      </div>
+      {loading ? (
+        <div className={style.loadercontainer}>
+          <div className={style.spinner}></div>
+        </div>
+      ) : (
+        <div className={style.cards}>
+          {filteredGames !== null && filteredGames.length > 0 ? (
+            filteredGames
+              .slice(page * 15 - 15, page * 15)
+              .map((game, i) => (
+                <Card
+                  key={i}
+                  id={game.id}
+                  name={game.name}
+                  image={game.image}
+                  rating={game.rating}
+                  releaseDate={game.releaseDate}
+                  description={game.description}
+                  genres={game.genres}
+                  created={game.created}
+                />
+              ))
+          ) : (
+            <div className={style.noGames}>No se encontraron juegos.</div>
+          )}
+        </div>
+      )}
+      <div className={style.pagination}>
+        <button onClick={goToPreviousPage} disabled={page === 1}>
+          🢀
+        </button>
+        <span>Page {page}</span>
+        <button onClick={goToNextPage} disabled={page === Math.ceil(filteredGames.length / 10)}>
+          🢂
+        </button>
       </div>
     </div>
   );

@@ -33,15 +33,22 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, genres: action.payload };
     case GENRE_FILTER:
       const selectedGenre = action.payload;
-      let filtered = [];
+      let filteredByGenre = [];
 
       if (selectedGenre !== "All") {
-        filtered = state.videoGames.filter((game) => game.genres.some((genre) => genre === selectedGenre));
+        filteredByGenre = state.videoGames.filter((game) => game.genres.some((genre) => genre === selectedGenre));
       } else {
-        filtered = [...state.videoGames];
+        filteredByGenre = [...state.videoGames];
       }
 
-      return { ...state, filteredGames: filtered };
+      if (state.platformFilter !== "" && state.platformFilter !== "All") {
+        filteredByGenre = filteredByGenre.filter(
+          (game) => game.platforms && game.platforms.some((platform) => platform === state.platformFilter)
+        );
+      }
+
+      return { ...state, filteredGames: filteredByGenre, genreFilter: selectedGenre };
+
     case ORDER_BY_RANKING:
       const isAscending = action.payload === "Ascendente";
       const sortedGamesByRating = [...state.filteredGames].sort((a, b) => {
@@ -89,16 +96,17 @@ const rootReducer = (state = initialState, action) => {
         filteredByPlatform = state.videoGames.filter(
           (game) => game.platforms && game.platforms.some((platform) => platform === selectedPlatform)
         );
-      } else
-        return {
-          ...state,
-          filteredGames: state.videoGames,
-        };
-      return {
-        ...state,
-        filteredGames: filteredByPlatform,
-      };
+      } else {
+        filteredByPlatform = [...state.videoGames];
+      }
 
+      if (state.genreFilter !== "" && state.genreFilter !== "All") {
+        filteredByPlatform = filteredByPlatform.filter((game) =>
+          game.genres.some((genre) => genre === state.genreFilter)
+        );
+      }
+
+      return { ...state, filteredGames: filteredByPlatform, platformFilter: selectedPlatform };
     case SOURCE_FILTER:
       const created = action.payload;
       let filteredBySource = [];

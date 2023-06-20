@@ -22,7 +22,9 @@ const Search = () => {
   return (
     <div className={style.container}>
       <input className={style.input} type="text" onChange={handleSearch} />
-      <button onClick={handleSearchClick}>Buscar</button>
+      <button className={style.button} onClick={handleSearchClick}>
+        Search
+      </button>
     </div>
   );
 };

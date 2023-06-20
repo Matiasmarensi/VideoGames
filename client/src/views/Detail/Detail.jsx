@@ -20,7 +20,7 @@ const Detail = () => {
   // const handleShowMore = () => {
   //   setShowFullDescription(true);
   // };
-  console.log(game);
+
   return (
     <div className={style.detail}>
       <div className={style.container}>

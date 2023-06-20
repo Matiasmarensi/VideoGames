@@ -27,9 +27,11 @@ export default function Card(props) {
   }
   return (
     <div className={`${style.card} ${ratingClass}`}>
-      <button onClick={handleDeleteGame} className={style.button}>
-        X
-      </button>
+      {props.created && (
+        <button onClick={handleDeleteGame} className={style.button}>
+          X
+        </button>
+      )}
       <Link to={`/videogames/${props.id}`}>
         <img src={props.image} alt={props.name} className={style.image} />
         <h3 className={style.title}>{props.name}</h3>

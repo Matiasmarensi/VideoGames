@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { getGenres, getPlatforms, createVideogame } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
-
+import validate from "./validate";
 const CreateVideogame = () => {
   const genres = useSelector((state) => state.genres);
   const platforms = useSelector((state) => state.platforms);
@@ -14,8 +14,7 @@ const CreateVideogame = () => {
   useEffect(() => {
     dispatch(getPlatforms());
   }, []);
-
-  const [newVideogame, setNewVideogame] = useState({
+  const initialVideogameState = {
     name: "",
     description: "",
     background_image: "",
@@ -24,8 +23,17 @@ const CreateVideogame = () => {
     genres: [],
     platforms: [],
     created: true,
+  };
+  const [newVideogame, setNewVideogame] = useState(initialVideogameState);
+  /////////////////////////////
+  //errorres
+  const [errors, setErrors] = useState({
+    name: "",
+    description: "",
+    releaseDate: "",
+    rating: "",
   });
-
+  ////////////////
   const handleChange = (event) => {
     const { name, value, checked } = event.target;
 
@@ -59,13 +67,19 @@ const CreateVideogame = () => {
         [name]: value,
       }));
     }
+    setErrors(validate({ ...newVideogame, [name]: value }));
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    dispatch(createVideogame(newVideogame));
+    if (Object.keys(errors).length === 0) {
+      dispatch(createVideogame(newVideogame));
+    } else {
+      window.alert("There are errors in the form");
+    }
+    setNewVideogame(initialVideogameState);
   };
-  console.log(newVideogame);
+
   return (
     <div className={style.create}>
       CreateVideogame
@@ -74,17 +88,26 @@ const CreateVideogame = () => {
           <div className={style.column}>
             <div className={style.columnItem}>
               <label>Name</label>
-              <input type="text" placeholder="name" name="name" value={newVideogame.name} onChange={handleChange} />
+              <input
+                type="text"
+                placeholder="choose the name of your game"
+                name="name"
+                value={newVideogame.name}
+                onChange={handleChange}
+              />
+              <p className={style.danger}>{errors.name}</p>
             </div>
             <div className={style.columnItem}>
               <label>Description</label>
-              <input
-                type="text"
-                placeholder="description"
+              <textarea
+                rows={4}
+                cols={40}
+                placeholder="Enter a description..."
                 name="description"
                 value={newVideogame.description}
                 onChange={handleChange}
               />
+              <p className={style.danger}>{errors.description}</p>
             </div>
             <div className={style.columnItem}>
               <label>Release Date</label>
@@ -98,8 +121,19 @@ const CreateVideogame = () => {
             </div>
             <div className={style.columnItem}>
               <label>Rating</label>
-              <input placeholder="rating" name="rating" value={newVideogame.rating} onChange={handleChange} />
+              <input
+                type="range"
+                min="0"
+                max="5"
+                step="0.01"
+                name="rating"
+                defaultValue={0}
+                value={newVideogame.rating}
+                onChange={handleChange}
+              />
+              <p>{}</p>
             </div>
+            <span>{newVideogame.rating}</span>
           </div>
           <div className={style.column}>
             <div className={style.columnItem1}>

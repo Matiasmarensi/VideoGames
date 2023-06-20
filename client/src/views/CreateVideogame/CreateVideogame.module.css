@@ -1,34 +1,46 @@
 .create {
+  font-family: electrolize;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px;
+    ;
+    height: 100vh;
+    color: #ccc;
   }
   
   .form {
+    color: #ccc;
     margin-top: 20px;
   }
   
   .formContainer {
+    color: #ccc;
     gap: 20px;
     display: flex;
     justify-content: space-between;
   }
   
   .column {
+    color: #ccc;
     display: table;
     grid-template-columns: repeat(3, 1fr); /* Cambiamos a tres columnas */
     gap: 6px;
   }
   
   .columnItem {
+    color: #ccc;
     margin-bottom: 10px;
   }
   
   label {
     display: block;
     margin-bottom: 5px;
+    color: white !important;
+    font-weight: bold !important;
+    background-color: rgba(22, 22, 24, 0.475);
+    background-position: center;
   }
   
   input[type="text"],
@@ -38,6 +50,7 @@
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-family: electrolize;
   }
   
   .scrollable {
@@ -45,30 +58,49 @@
     overflow-y: auto;
     border: 1px solid #ccc;
     padding: 5px;
+    text-align: left;
+    
+  }
+  .danger {
+    font-size: 10px;
+    color: red;
+    margin-left: 10em;
   }
   
   .button {
+    
     margin: 10px;
     margin-top: 15%;
     align-self:flex-start;
   }
   
   .button button {
+    font-family: electrolize;
+    font-size: 20px;
     padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+    background-color: #ff7d1f;
+    color: black;
+    font-weight: bold;
+    border: 1.6px solid black;
+    
     border-radius: 5px;
     cursor: pointer;
   }
   
   /* Modificaciones */
   .columnItem1 {
+    
+    color: #ccc;
     margin-bottom: 10px;
     justify-self: start;
   }
+  .columnItem.input {
+    font-family: electrolize;
+    
+  }
   
   .columnItem2 {
+    color: #ccc;
     margin-bottom: 10px;
     justify-self: start;
   }
