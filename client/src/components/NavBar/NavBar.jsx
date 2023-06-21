@@ -10,10 +10,12 @@ const NavBar = () => {
         Home
       </Link>
       <div className={style.search}>{location.pathname === "/home" && <Search />}</div>
-
-      <Link to="/create" className={style.link}>
-        Create
-      </Link>
+      {location.pathname === "/create" && <div className={style.tittle}>Create your own Videogame</div>}
+      {location.pathname !== "/create" && (
+        <Link to="/create" className={style.link}>
+          Create
+        </Link>
+      )}
     </div>
   );
 };

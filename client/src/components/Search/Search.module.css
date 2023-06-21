@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
 .container {
-    
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,6 +17,7 @@
   }
   
   .button {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     font-family: Electrolize;
     font-size: 16px;
     margin-top: 1px;

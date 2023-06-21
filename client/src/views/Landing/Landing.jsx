@@ -4,9 +4,9 @@ import style from "./Landing.module.css";
 const Landing = () => {
   return (
     <div className={style.container}>
-      <h1 className={style.title}>Landing asdasd asdsa</h1>
+      <h1 className={style.title}>Welcome to our gaming website!</h1>
       <Link to="/home" className={style.link}>
-        Home
+        Get started
       </Link>
     </div>
   );

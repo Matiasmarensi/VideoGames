@@ -209,7 +209,7 @@ const CardsContainer = () => {
           )}
         </div>
       )}
-      <div className={style.pagination}>
+      <div className={style.pagination2}>
         <button onClick={goToPreviousPage} disabled={page === 1}>
           🢀
         </button>

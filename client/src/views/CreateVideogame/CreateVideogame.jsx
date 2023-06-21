@@ -89,7 +89,6 @@ const CreateVideogame = () => {
 
   return (
     <div className={style.create}>
-      CreateVideogame
       <div className={style.form}>
         <form onSubmit={submitHandler} className={style.formContainer}>
           <div className={style.column}>
@@ -105,7 +104,7 @@ const CreateVideogame = () => {
               <p className={style.danger}>{errors.name}</p>
             </div>
             <div className={style.columnItem}>
-              <label>Background Image URL</label>
+              <label>Image URL</label>
               <input
                 type="text"
                 placeholder="Enter the URL of the background image"

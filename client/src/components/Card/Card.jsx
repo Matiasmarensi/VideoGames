@@ -10,8 +10,12 @@ export default function Card(props) {
   const genres = props.genres.join("\n");
   const dispatch = useDispatch();
   const handleDeleteGame = () => {
-    dispatch(deleteGame(props.id));
-    dispatch(getGames());
+    const confirmed = window.confirm("Are you sure you want to delete this game");
+
+    if (confirmed) {
+      dispatch(deleteGame(props.id));
+      dispatch(getGames());
+    }
   };
 
   const ratingClass = getRatingClass(props.rating);

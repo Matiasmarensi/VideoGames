@@ -1,6 +1,8 @@
 .container {
   background-image: url('https://images.unsplash.com/photo-1592659762303-90081d34b277?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGNifGVufDB8fDB8fHww&w=1000&q=80');
-    background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
     margin-top: 0px;
     padding: auto;
     min-height:100vh;
@@ -23,12 +25,7 @@
     border-radius: 61px;
     box-shadow: 10px 12px 21px rgba(0, 0, 0.2, 0.7);
   }
-.data {
-   
 
-    
-   
-  }
   
   .rating {
     font-size: 18px;
@@ -79,3 +76,43 @@
     color: #fff;
   }
   
+
+
+.noGames {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+
+.loadercontainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background-image: url('https://images.unsplash.com/photo-1592659762303-90081d34b277?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGNifGVufDB8fDB8fHww&w=1000&q=80');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  z-index: 1;
+}
+
+.spinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #05204b transparent #ff7d1f transparent;
+  border-radius: 50%;
+  animation: spin-anim 1.2s linear infinite;
+}
+
+@keyframes spin-anim {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
