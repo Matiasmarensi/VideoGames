@@ -61,10 +61,12 @@
     text-align: left;
     
   }
+
+ 
   .danger {
     font-size: 10px;
-    color: red;
-    margin-left: 10em;
+    color: rgb(255, 225, 0);
+    margin-left: 22em;
   }
   
   .button {
@@ -86,6 +88,18 @@
     border-radius: 5px;
     cursor: pointer;
   }
+  .button :disabled{
+    font-family: electrolize;
+    font-size: 20px;
+    padding: 10px 20px;
+    background-color: #a9a5a2;
+    color: black;
+    font-weight: bold;
+    border: 1.6px solid black;
+    
+    border-radius: 5px;
+    cursor: pointer;
+  }
   
   /* Modificaciones */
   .columnItem1 {
@@ -93,6 +107,10 @@
     color: #ccc;
     margin-bottom: 10px;
     justify-self: start;
+  }
+  .columnItem1 p{
+   
+   display: contents;
   }
   .columnItem.input {
     font-family: electrolize;
@@ -103,5 +121,8 @@
     color: #ccc;
     margin-bottom: 10px;
     justify-self: start;
+  }
+  .columnItem2 p{
+    display: contents; 
   }
   

@@ -17,13 +17,14 @@ const CreateVideogame = () => {
   const initialVideogameState = {
     name: "",
     description: "",
-    background_image: "",
+    image: "https://avatars.githubusercontent.com/u/57154655?s=280&v=4",
     releaseDate: "",
     rating: "",
     genres: [],
     platforms: [],
     created: true,
   };
+
   const [newVideogame, setNewVideogame] = useState(initialVideogameState);
   /////////////////////////////
   //errorres
@@ -37,7 +38,12 @@ const CreateVideogame = () => {
   const handleChange = (event) => {
     const { name, value, checked } = event.target;
 
-    if (name === "platforms") {
+    if (name === "image") {
+      setNewVideogame((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    } else if (name === "platforms") {
       if (checked) {
         setNewVideogame((prevState) => ({
           ...prevState,
@@ -67,6 +73,7 @@ const CreateVideogame = () => {
         [name]: value,
       }));
     }
+    //set error validate for every input in the form
     setErrors(validate({ ...newVideogame, [name]: value }));
   };
 
@@ -74,10 +81,10 @@ const CreateVideogame = () => {
     event.preventDefault();
     if (Object.keys(errors).length === 0) {
       dispatch(createVideogame(newVideogame));
+      setNewVideogame(initialVideogameState);
     } else {
       window.alert("There are errors in the form");
     }
-    setNewVideogame(initialVideogameState);
   };
 
   return (
@@ -96,6 +103,16 @@ const CreateVideogame = () => {
                 onChange={handleChange}
               />
               <p className={style.danger}>{errors.name}</p>
+            </div>
+            <div className={style.columnItem}>
+              <label>Background Image URL</label>
+              <input
+                type="text"
+                placeholder="Enter the URL of the background image"
+                name="image"
+                value={newVideogame.image}
+                onChange={handleChange}
+              />
             </div>
             <div className={style.columnItem}>
               <label>Description</label>
@@ -118,6 +135,7 @@ const CreateVideogame = () => {
                 value={newVideogame.releaseDate}
                 onChange={handleChange}
               />
+              <p className={style.danger}>{errors.releaseDate}</p>
             </div>
             <div className={style.columnItem}>
               <label>Rating</label>
@@ -127,11 +145,11 @@ const CreateVideogame = () => {
                 max="5"
                 step="0.01"
                 name="rating"
-                defaultValue={0}
                 value={newVideogame.rating}
                 onChange={handleChange}
               />
-              <p>{}</p>
+
+              <p className={style.danger}>{errors.rating}</p>
             </div>
             <span>{newVideogame.rating}</span>
           </div>
@@ -154,6 +172,7 @@ const CreateVideogame = () => {
                   ))}
                 </div>
               </div>
+              <p className={style.danger}>{errors.platforms}</p>
             </div>
           </div>
           <div className={style.column}>
@@ -175,10 +194,11 @@ const CreateVideogame = () => {
                   ))}
                 </div>
               </div>
+              <p className={style.danger}>{errors.genres}</p>
             </div>
           </div>
           <div className={style.button}>
-            <button className={style.button} type="submit">
+            <button className={style.button} disabled={Object.keys(errors).length > 0} type="submit">
               Create
             </button>
           </div>

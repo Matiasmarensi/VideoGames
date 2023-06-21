@@ -17,8 +17,6 @@ const Search = () => {
     dispatch(getGamesByQuery(gameSearch));
   };
 
-  console.log(gameSearch);
-
   return (
     <div className={style.container}>
       <input className={style.input} type="text" onChange={handleSearch} />

@@ -33,9 +33,13 @@ const CardsContainer = () => {
 
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+
+    dispatch(getGames())
+      .then(() => setLoading(false))
+      .catch((error) => {
+        setLoading(false);
+        console.log("Error:", error);
+      });
   }, []);
 
   useEffect(() => {
@@ -45,6 +49,7 @@ const CardsContainer = () => {
   const handleSourceFilter = (event) => {
     const source = event.target.value;
     setSource(source);
+    setPage(1);
   };
   ///////////////////////////////////
   useEffect(() => {
@@ -58,6 +63,7 @@ const CardsContainer = () => {
   const handleGenreChange = (event) => {
     const selected = event.target.value;
     setSelectedGenre(selected);
+    setPage(1);
   };
   //filtro platforms
   useEffect(() => {
@@ -67,6 +73,7 @@ const CardsContainer = () => {
   const handleChangePlatform = (event) => {
     const selected = event.target.value;
     setSelectedPlatform(selected);
+    setPage(1);
   };
   //order by name
   useEffect(() => {
@@ -76,6 +83,7 @@ const CardsContainer = () => {
   const handleOrderChange = (event) => {
     const selectedOrder = event.target.value;
     setOrderBy(selectedOrder);
+    setPage(1);
   };
   // order by rankig
   useEffect(() => {
@@ -85,6 +93,7 @@ const CardsContainer = () => {
   const handleRatingChange = (event) => {
     const rating = event.target.value;
     setOrderBy(rating);
+    setPage(1);
   };
   //////////////////////////////////
   const goToPreviousPage = () => {

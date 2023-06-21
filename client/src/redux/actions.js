@@ -89,7 +89,7 @@ export const orderGamesRating = (orderBy) => {
     payload: orderBy,
   };
 };
-//Botones/Opciones para filtrar por género, y por si su origen es de la API o de la base de datos (creados por nosotros desde el formulario).
+
 export const sourceFilter = (filterValue) => {
   return {
     type: SOURCE_FILTER,

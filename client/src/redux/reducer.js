@@ -21,6 +21,7 @@ const initialState = {
   platforms: [],
   game: [],
   sourceFilter: [],
+  platformFilter: "",
 };
 
 const rootReducer = (state = initialState, action) => {
