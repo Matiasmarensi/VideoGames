@@ -69,7 +69,7 @@ const rootReducer = (state = initialState, action) => {
     case ORDER_BY_NAME:
       let aux = state.filteredGames;
 
-      if (aux.length < 1) {
+      if (aux?.length < 1) {
         aux = state.videoGames;
       }
       const sorted = aux.sort((a, b) => {

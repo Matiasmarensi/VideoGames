@@ -10,6 +10,7 @@ const Detail = () => {
   const dispatch = useDispatch();
   const game = useSelector((state) => state.game);
   const [loading, setLoading] = useState(true);
+
   // useEffect(() => {
   //     setLoading(true);
 
@@ -48,6 +49,8 @@ const Detail = () => {
           <h2 className={style.name}>{game.name}</h2>
           <img className={style.image} src={game.image} alt="asdadasds" />
           <div className={style.data}>
+            <div className={style.released}>Released: {game.releaseDate}</div>
+
             <h2 className={style.rating}>Rating: {game.rating}</h2>
             <div className={style.description} dangerouslySetInnerHTML={{ __html: game.description }}></div>
             <div className={style.platforms}>

@@ -73,7 +73,7 @@ const CreateVideogame = () => {
         [name]: value,
       }));
     }
-    //set error validate for every input in the form
+
     setErrors(validate({ ...newVideogame, [name]: value }));
   };
 

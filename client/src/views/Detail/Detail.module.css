@@ -27,11 +27,7 @@
   }
 
   
-  .rating {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #237878;
-  }
+  
   
   .description {
     margin-bottom: 10px;
@@ -40,7 +36,7 @@
     margin-left: 20px;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.8);
-    
+    font-family: Electrolize;
     border-radius: 8px;
     box-shadow: 0 9px 4px rgba(0, 0, 0, 0.2);
  
@@ -49,6 +45,8 @@
   
   }
   .rating{
+    
+    font-family: Electrolize;
     display: inline-block;
     margin-right: 5px;
     padding: 4px 8px;
@@ -62,10 +60,21 @@
   
   .platforms, .genres {
     color: #fff;
-  
+    font-family: Electrolize;
   }
+  .released{
+    font-family: Electrolize;
   
+    margin-right: 5px;
+    padding: 4px 8px;
+    margin: 2px;
+    
+    border-radius: 4px;
+    font-size: 18px;
+    color: #fff;
+  }
   .platforms div, .genres div {
+    font-family: Electrolize;
     display: inline-block;
     margin-right: 5px;
     padding: 4px 8px;

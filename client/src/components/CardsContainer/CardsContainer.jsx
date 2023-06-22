@@ -28,7 +28,12 @@ const CardsContainer = () => {
   const [search, setSearch] = useState("");
   const [source, setSource] = useState("");
   const [page, setPage] = useState(1);
-
+  const itemsPerPage = 15;
+  const totalPages = Math.ceil(filteredGames.length / itemsPerPage);
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -104,7 +109,7 @@ const CardsContainer = () => {
 
   // Función para ir a la página siguiente
   const goToNextPage = () => {
-    if (page < Math.ceil(filteredGames.length / 15)) {
+    if (page < Math.ceil(filteredGames.length / itemsPerPage)) {
       setPage(page + 1);
     }
   };
@@ -174,11 +179,16 @@ const CardsContainer = () => {
         </div>
       </div>
       <div className={style.pagination}>
+        <span>Page {page}</span>
         <button onClick={goToPreviousPage} disabled={page === 1}>
           🢀
         </button>
-        <span>Page {page}</span>
-        <button onClick={goToNextPage} disabled={page === Math.ceil(filteredGames.length / 15)}>
+        {pageNumbers.map((pageNumber) => (
+          <button key={pageNumber} onClick={() => setPage(pageNumber)}>
+            {pageNumber}
+          </button>
+        ))}
+        <button onClick={goToNextPage} disabled={page === Math.ceil(filteredGames?.length / itemsPerPage)}>
           🢂
         </button>
       </div>
@@ -190,7 +200,7 @@ const CardsContainer = () => {
         <div className={style.cards}>
           {filteredGames !== null && filteredGames.length > 0 ? (
             filteredGames
-              .slice(page * 15 - 15, page * 15)
+              .slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)
               .map((game, i) => (
                 <Card
                   key={i}
@@ -210,11 +220,16 @@ const CardsContainer = () => {
         </div>
       )}
       <div className={style.pagination2}>
+        <span>Page {page}</span>
         <button onClick={goToPreviousPage} disabled={page === 1}>
           🢀
         </button>
-        <span>Page {page}</span>
-        <button onClick={goToNextPage} disabled={page === Math.ceil(filteredGames.length / 10)}>
+        {pageNumbers.map((pageNumber) => (
+          <button key={pageNumber} onClick={() => setPage(pageNumber)}>
+            {pageNumber}
+          </button>
+        ))}
+        <button onClick={goToNextPage} disabled={page === Math.ceil(filteredGames?.length / itemsPerPage)}>
           🢂
         </button>
       </div>

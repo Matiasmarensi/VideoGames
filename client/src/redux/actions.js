@@ -106,10 +106,16 @@ export const deleteGame = (id) => {
 
 export const createVideogame = (newVideogame) => {
   return (dispatch) => {
-    axios.post("http://localhost:3001/videogames", newVideogame).then((res) => {
-      alert("Videojuego creado");
-      dispatch({ type: POST_GAME, payload: newVideogame });
-    });
+    axios
+      .post("http://localhost:3001/videogames", newVideogame)
+      .then((res) => {
+        alert("Videojuego creado");
+        dispatch({ type: POST_GAME, payload: newVideogame });
+      })
+      .catch((error) => {
+        console.log(error.response.data.error);
+        alert(error.response.data.error);
+      });
   };
 };
 
