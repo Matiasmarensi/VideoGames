@@ -5,7 +5,7 @@ const getById = async (req, res) => {
 
   try {
     const gameById = await getGameByID(id);
-
+    console.log(gameById);
     if (gameById) {
       return res.status(200).json(gameById);
     } else {

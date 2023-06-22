@@ -16,7 +16,7 @@ const getPlatforms = async () => {
 
     await Consola.bulkCreate(plataformas);
 
-    return plataformas; // Devolver las plataformas en lugar de platformsBdd
+    return plataformas;
   }
 
   return platformsBdd;

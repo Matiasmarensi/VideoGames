@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { Videogame, Genre, Consola } = require("../db");
 
-const API_KEY = "6f9bcb5437d640988efc49c8ab757774"; // Reemplaza esto con tu API key de RAWG
+const API_KEY = "6f9bcb5437d640988efc49c8ab757774";
 
 const URL = "https://api.rawg.io/api/";
 
@@ -41,7 +41,7 @@ const getGameByID = async (id) => {
       image: gameData.data.background_image,
       description: gameData.data.description,
       platforms: gameData.data.platforms.map((p) => p.platform.name),
-      releaseDate: gameData.data.releaseDate,
+      releaseDate: gameData.data.released,
       rating: gameData.data.rating,
       genres: gameData.data.genres.map((e) => e.name),
     };
