@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 
 const URL = "https://api.rawg.io/api/";
 const RESULTS_PER_PAGE = 50;
-const MAX_RESULTS = 200;
+const MAX_RESULTS = 100;
 
 const getAllvideogames = async (query) => {
   let dataBaseVideogames = [];

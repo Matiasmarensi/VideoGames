@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { Videogame, Genre, Consola } = require("../db");
 
-const API_KEY = "6f9bcb5437d640988efc49c8ab757774";
+const API_KEY = "4bfc88d09107405da01752a5a35aa16f";
 
 const URL = "https://api.rawg.io/api/";
 

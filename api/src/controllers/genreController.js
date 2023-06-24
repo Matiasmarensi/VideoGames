@@ -13,7 +13,7 @@ const getGenres = async () => {
     await Genre.bulkCreate(genres);
     return existingGenres;
   }
-  console.log(existingGenres);
+
   return existingGenres;
 };
 
