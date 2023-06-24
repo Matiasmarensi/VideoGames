@@ -29,10 +29,10 @@ const Detail = () => {
         setLoading(false);
         console.log("Error:", error);
       });
-    return () => {
-      dispatch(getGameById(""));
-    };
-  }, [id]);
+    // return () => {
+    //   dispatch(getGameById(""));
+    // };
+  }, []);
 
   // const handleShowMore = () => {
   //   setShowFullDescription(true);
@@ -46,10 +46,14 @@ const Detail = () => {
         </div>
       ) : (
         <div className={style.container}>
-          <h2 className={style.name}>{game.name}</h2>
-          <img className={style.image} src={game.image} alt="asdadasds" />
+          <h2 className={style.name}>
+            ID {game.id}
+            {" - "}
+            {game.name}
+          </h2>
+          <img className={style.image} src={game.image} alt={`${game.name}`} />
           <div className={style.data}>
-            <div className={style.released}>Released: {game.releaseDate}</div>
+            <div className={style.released}>Released: {game.releaseDate ? game.releaseDate : "No date"}</div>
 
             <h2 className={style.rating}>Rating: {game.rating}</h2>
             <div className={style.description} dangerouslySetInnerHTML={{ __html: game.description }}></div>

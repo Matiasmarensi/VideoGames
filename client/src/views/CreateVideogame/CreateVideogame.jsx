@@ -8,12 +8,12 @@ const CreateVideogame = () => {
   const genres = useSelector((state) => state.genres);
   const platforms = useSelector((state) => state.platforms);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getGenres());
-  }, []);
-  useEffect(() => {
-    dispatch(getPlatforms());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getGenres());
+  // }, []);
+  // useEffect(() => {
+  //   dispatch(getPlatforms());
+  // }, []);
   const initialVideogameState = {
     name: "",
     description: "",

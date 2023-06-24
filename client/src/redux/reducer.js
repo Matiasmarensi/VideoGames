@@ -17,39 +17,63 @@ const initialState = {
   videoGames: [],
   genres: [],
   filteredGames: [],
-  genreFilter: "",
   platforms: [],
   game: [],
-  sourceFilter: [],
+  // sourceFilter: "",
   platformFilter: "",
+  genreFilter: "",
+  selectedGenre: "All",
+  selectedPlatform: "All",
+  orderBy: "",
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_GAMES:
-      return { ...state, videoGames: action.payload };
+      return {
+        ...state,
+        videoGames: action.payload,
+        filteredGames: action.payload,
+      };
     case GET_GAMES_BY_NAME:
       return { ...state, filteredGames: action.payload };
     case GET_GENRES:
       return { ...state, genres: action.payload };
     case GENRE_FILTER:
-      const selectedGenre = action.payload;
+      const genreFilter = action.payload;
       let filteredByGenre = [];
 
-      if (selectedGenre !== "All") {
-        filteredByGenre = state.videoGames.filter((game) => game.genres.some((genre) => genre === selectedGenre));
+      if (genreFilter !== "All") {
+        filteredByGenre = state.videoGames.filter((game) => game.genres.includes(genreFilter));
       } else {
         filteredByGenre = [...state.videoGames];
       }
 
       if (state.platformFilter !== "" && state.platformFilter !== "All") {
-        filteredByGenre = filteredByGenre.filter(
-          (game) => game.platforms && game.platforms.some((platform) => platform === state.platformFilter)
-        );
+        filteredByGenre = filteredByGenre.filter((game) => game.platforms.includes(state.platformFilter));
       }
 
-      return { ...state, filteredGames: filteredByGenre, genreFilter: selectedGenre };
+      return {
+        ...state,
+        filteredGames: filteredByGenre,
+        genreFilter: genreFilter,
+      };
 
+    case PLATFORM_FILTER:
+      const selectedPlatform = action.payload;
+      let filteredByPlatform = [];
+
+      if (selectedPlatform !== "All") {
+        filteredByPlatform = state.videoGames.filter((game) => game.platforms.includes(selectedPlatform));
+      } else {
+        filteredByPlatform = [...state.videoGames];
+      }
+
+      if (state.genreFilter !== "" && state.genreFilter !== "All") {
+        filteredByPlatform = filteredByPlatform.filter((game) => game.genres.includes(state.genreFilter));
+      }
+
+      return { ...state, filteredGames: filteredByPlatform, platformFilter: selectedPlatform };
     case ORDER_BY_RANKING:
       const isAscending = action.payload === "Ascendente";
       const sortedGamesByRating = [...state.filteredGames].sort((a, b) => {
@@ -89,25 +113,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         platforms: action.payload,
       };
-    case PLATFORM_FILTER:
-      const selectedPlatform = action.payload;
-      let filteredByPlatform = [];
-
-      if (selectedPlatform !== "All") {
-        filteredByPlatform = state.videoGames.filter(
-          (game) => game.platforms && game.platforms.some((platform) => platform === selectedPlatform)
-        );
-      } else {
-        filteredByPlatform = [...state.videoGames];
-      }
-
-      if (state.genreFilter !== "" && state.genreFilter !== "All") {
-        filteredByPlatform = filteredByPlatform.filter((game) =>
-          game.genres.some((genre) => genre === state.genreFilter)
-        );
-      }
-
-      return { ...state, filteredGames: filteredByPlatform, platformFilter: selectedPlatform };
     case SOURCE_FILTER:
       const created = action.payload;
       let filteredBySource = [];
@@ -117,7 +122,7 @@ const rootReducer = (state = initialState, action) => {
       } else if (created === "false") {
         filteredBySource = state.videoGames.filter((game) => game.created === undefined);
       } else {
-        filteredBySource = [...state.videoGames];
+        filteredBySource = [...state.filteredGames];
       }
 
       return {

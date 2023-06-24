@@ -14,7 +14,7 @@ import {
   deleteGames,
 } from "../../redux/actions";
 ////////////////////////////////////////////////////////
-const CardsContainer = () => {
+const CardsContainer = ({ loading }) => {
   const games = useSelector((state) => state.videoGames);
   const genres = useSelector((state) => state.genres);
   const platforms = useSelector((state) => state.platforms);
@@ -22,7 +22,7 @@ const CardsContainer = () => {
   const filteredGames = useSelector((state) => state.filteredGames);
 
   const dispatch = useDispatch();
-  const [selectedGenre, setSelectedGenre] = useState("All");
+  const selectedGenre = useSelector((state) => state.selectedGenre);
   const [orderBy, setOrderBy] = useState("");
   const [selectedPlatform, setSelectedPlatform] = useState("All");
   const [search, setSearch] = useState("");
@@ -34,69 +34,71 @@ const CardsContainer = () => {
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  /////////////////////////////////
+  // useEffect(() => {
+  //   setLoading(true);
+  //   if (filteredGames.length > 0) {
+  //     dispatch(getGames())
+  //       .then(() => setLoading(false))
+  //       .catch((error) => {
+  //         setLoading(false);
+  //         console.log("Error:", error);
+  //       });
+  //   }
+  //   setLoading(false);
+  // }, []);
 
-  useEffect(() => {
-    setLoading(true);
-
-    dispatch(getGames())
-      .then(() => setLoading(false))
-      .catch((error) => {
-        setLoading(false);
-        console.log("Error:", error);
-      });
-  }, []);
-
-  useEffect(() => {
-    dispatch(sourceFilter(source));
-  }, [source]);
+  // useEffect(() => {
+  //   dispatch(sourceFilter(source));
+  // }, [source]);
 
   const handleSourceFilter = (event) => {
     const source = event.target.value;
+    dispatch(sourceFilter(source));
     setSource(source);
+
     setPage(1);
   };
   ///////////////////////////////////
-  useEffect(() => {
-    dispatch(getGamesByQuery(search));
-  }, [search]);
+  // useEffect(() => {
+  //   dispatch(getGamesByQuery(search));
+  // }, [search]);
   //filtro genres
-  useEffect(() => {
-    dispatch(setGenreFilter(selectedGenre));
-  }, [selectedGenre]);
-
+  // useEffect(() => {
+  //   dispatch(setGenreFilter(selectedGenre));
+  // }, [selectedGenre]);
   const handleGenreChange = (event) => {
     const selected = event.target.value;
-    setSelectedGenre(selected);
+    dispatch(setGenreFilter(selected));
     setPage(1);
   };
   //filtro platforms
-  useEffect(() => {
-    dispatch(setPlatformFilter(selectedPlatform));
-  }, [selectedPlatform]);
 
   const handleChangePlatform = (event) => {
     const selected = event.target.value;
-    setSelectedPlatform(selected);
+    dispatch(setPlatformFilter(selected));
     setPage(1);
   };
   //order by name
-  useEffect(() => {
-    dispatch(orderGames(orderBy));
-  }, [orderBy]);
+  // useEffect(() => {
+  //   dispatch(orderGames(orderBy));
+  // }, [orderBy]);
 
   const handleOrderChange = (event) => {
     const selectedOrder = event.target.value;
+    dispatch(orderGames(orderBy));
     setOrderBy(selectedOrder);
     setPage(1);
   };
-  // order by rankig
-  useEffect(() => {
-    dispatch(orderGamesRating(orderBy));
-  }, [orderBy]);
+  // // order by rankig
+  // useEffect(() => {
+  //   dispatch(orderGamesRating(orderBy));
+  // }, [orderBy]);
 
   const handleRatingChange = (event) => {
     const rating = event.target.value;
+    dispatch(orderGamesRating(orderBy));
     setOrderBy(rating);
     setPage(1);
   };
@@ -184,7 +186,7 @@ const CardsContainer = () => {
           🢀
         </button>
         {pageNumbers.map((pageNumber) => (
-          <button key={pageNumber} onClick={() => setPage(pageNumber)}>
+          <button key={pageNumber} className={pageNumber === page ? style.bot : ""} onClick={() => setPage(pageNumber)}>
             {pageNumber}
           </button>
         ))}
@@ -225,7 +227,7 @@ const CardsContainer = () => {
           🢀
         </button>
         {pageNumbers.map((pageNumber) => (
-          <button key={pageNumber} onClick={() => setPage(pageNumber)}>
+          <button key={pageNumber} className={pageNumber === page ? style.bot : ""} onClick={() => setPage(pageNumber)}>
             {pageNumber}
           </button>
         ))}

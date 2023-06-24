@@ -156,6 +156,11 @@
   color: #999999; 
   cursor: not-allowed; 
 }
+.bot{
+  background-color: #cccccc !important; 
+   
+  cursor: not-allowed !important; 
+}
 .pagination2 button:active {
   background-color: #ff7d1f; 
   transform: scale(0.95); 
