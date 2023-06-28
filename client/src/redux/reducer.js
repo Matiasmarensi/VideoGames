@@ -11,6 +11,7 @@ import {
   GET_GAME_BY_ID,
   DELETE_GAME,
   POST_GAME,
+  UPDATE_GENRES,
 } from "./actions";
 
 const initialState = {
@@ -22,8 +23,8 @@ const initialState = {
   // sourceFilter: "",
   platformFilter: "",
   genreFilter: "",
-  selectedGenre: "All",
-  selectedPlatform: "All",
+  // selectedGenre: "All",
+  // selectedPlatform: "All",
   orderBy: "",
 };
 
@@ -75,7 +76,7 @@ const rootReducer = (state = initialState, action) => {
 
       return { ...state, filteredGames: filteredByPlatform, platformFilter: selectedPlatform };
     case ORDER_BY_RANKING:
-      const isAscending = action.payload === "Ascendente";
+      const isAscending = action.payload === "Descendente";
       const sortedGamesByRating = [...state.filteredGames].sort((a, b) => {
         if (isAscending) {
           return a.rating - b.rating; // Orden ascendente
@@ -121,8 +122,8 @@ const rootReducer = (state = initialState, action) => {
         filteredBySource = state.videoGames.filter((game) => game.created === true);
       } else if (created === "false") {
         filteredBySource = state.videoGames.filter((game) => game.created === undefined);
-      } else {
-        filteredBySource = [...state.filteredGames];
+      } else if (created === "All") {
+        filteredBySource = [...state.videoGames];
       }
 
       return {
@@ -145,6 +146,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         videoGames: [...state.videoGames, action.payload],
         filteredGames: [...state.filteredGames, action.payload],
+      };
+
+    case UPDATE_GENRES:
+      const genre = action.payload;
+      return {
+        ...state,
+        genreFilter: genre,
       };
 
     default:

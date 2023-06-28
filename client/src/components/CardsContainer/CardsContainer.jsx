@@ -29,7 +29,7 @@ const CardsContainer = ({ loading }) => {
   const [source, setSource] = useState("");
   const [page, setPage] = useState(1);
   const itemsPerPage = 15;
-  const totalPages = Math.ceil(filteredGames.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredGames?.length / itemsPerPage);
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
@@ -109,7 +109,7 @@ const CardsContainer = ({ loading }) => {
     }
   };
 
-  // Función para ir a la página siguiente
+  // Funcion para ir a la página siguiente
   const goToNextPage = () => {
     if (page < Math.ceil(filteredGames.length / itemsPerPage)) {
       setPage(page + 1);
@@ -170,7 +170,7 @@ const CardsContainer = ({ loading }) => {
           </select>
           {/* <label className={style.labelgenre}>Source:</label> */}
 
-          <select className={style.select} onChange={handleSourceFilter} value={source}>
+          <select className={style.select} onChange={handleSourceFilter}>
             <option disabled selected>
               Source
             </option>

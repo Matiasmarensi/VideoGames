@@ -18,7 +18,15 @@
   
 
 }
-
+.gold{
+  border-color: #f0ff22fb;
+}
+.silver{
+  border-color: rgb(163, 163, 163);
+}
+.bronze{
+  border-color: #ff7d1f;
+}
 .card:hover {
   transform: translateY(-15px);
   box-shadow: 0 5px 19px rgb(254, 253, 253);

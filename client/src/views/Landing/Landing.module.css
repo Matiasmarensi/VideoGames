@@ -5,7 +5,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url('https://singularityhub.com/wp-content/uploads/2018/10/concept-circuit-board-blue-orange-shutterstock_703395397.jpg');
+    background-size: cover;
+    background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHk0NmMzMTdraDBtMnE0ZTV2amd5dGd4NmhnY2kwMWZmbDF6aDNndCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/doXBzUFJRxpaUbuaqz/giphy.gif');
   }
   
   .title {

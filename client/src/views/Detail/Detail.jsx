@@ -2,11 +2,12 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import style from "./Detail.module.css";
 import { useEffect, useState } from "react";
-import { getGameById } from "../../redux/actions";
+import { getGameById, getGames } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Detail = () => {
   const { id } = useParams();
+
   const dispatch = useDispatch();
   const game = useSelector((state) => state.game);
   const [loading, setLoading] = useState(true);
@@ -29,9 +30,6 @@ const Detail = () => {
         setLoading(false);
         console.log("Error:", error);
       });
-    // return () => {
-    //   dispatch(getGameById(""));
-    // };
   }, []);
 
   // const handleShowMore = () => {

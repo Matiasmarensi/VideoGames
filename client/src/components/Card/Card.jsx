@@ -21,11 +21,11 @@ export default function Card(props) {
   const ratingClass = getRatingClass(props.rating);
 
   function getRatingClass(rating) {
-    if (rating >= 0 && rating < 2) {
+    if (rating >= 0 && rating < 3.5) {
       return style.bronze;
-    } else if (rating >= 2 && rating < 4.5) {
+    } else if (rating >= 3.5 && rating < 4.2) {
       return style.silver;
-    } else if (rating >= 4.5 && rating <= 5) {
+    } else if (rating >= 4.2 && rating <= 5) {
       return style.gold;
     }
   }

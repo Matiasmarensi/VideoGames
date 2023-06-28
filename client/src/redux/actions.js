@@ -12,6 +12,7 @@ export const GET_GAMES_BY_NAME = "GET_GAMES_BY_NAME";
 export const GET_GAME_BY_ID = "GET_GAME_BY_ID";
 export const DELETE_GAME = "DELETE_GAME";
 export const POST_GAME = "POST_GAME";
+export const UPDATE_GENRES = "UPDATE_GENRES";
 
 // export const CREATED_BY_ME_FILTER = "CREATED_BY_ME_FILTER";
 export const getGames = () => {
@@ -99,7 +100,7 @@ export const sourceFilter = (filterValue) => {
 export const deleteGame = (id) => {
   return async function (dispatch) {
     await axios.delete(`http://localhost:3001/videogames/${id}`);
-
+    await dispatch(getGames());
     return dispatch({ type: DELETE_GAME, payload: id });
   };
 };
@@ -111,14 +112,21 @@ export const createVideogame = (newVideogame) => {
       .then((res) => {
         alert("Videojuego creado");
         dispatch({ type: POST_GAME, payload: newVideogame });
+        dispatch(getGames());
       })
       .catch((error) => {
         console.log(error.response.data.error);
         alert(error.response.data.error);
       });
-    console.log(newVideogame);
   };
 };
+
+// export const updateGenres = (genres) => {
+//   return {
+//     type: UPDATE_GENRES,
+//     payload: genres,
+//   };
+// };
 
 // export const filterByCreatedByMe = (filterValue) => ({
 //   type: CREATED_BY_ME_FILTER,
