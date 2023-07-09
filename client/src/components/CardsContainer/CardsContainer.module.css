@@ -62,7 +62,14 @@
 .pagination{
   margin: 10px;
 }
-
+.noGames{
+  background-color:#fd591a ;
+  font-family: Electrolize;
+  display: flex;
+  position: relative;
+  left:100%;
+  margin:20px;
+}
 .pagination button{
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   margin:20px;

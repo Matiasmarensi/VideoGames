@@ -78,6 +78,9 @@ const CreateVideogame = () => {
 
     setErrors(validate({ ...newVideogame, [name]: value }));
   };
+  useEffect(() => {
+    setErrors(validate(newVideogame));
+  }, [newVideogame]);
 
   const submitHandler = (event) => {
     event.preventDefault();
