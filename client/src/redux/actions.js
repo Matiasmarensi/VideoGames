@@ -36,13 +36,24 @@ export const getGamesByQuery = (name) => {
 };
 export const getGenres = () => {
   return async function (dispatch) {
-    const response = await axios.get("/genres");
-    const genres = response.data.map((genre) => ({
-      id: genre.id,
-      name: genre.name,
-    }));
+    try {
+      const response = await axios.get("/genres");
 
-    dispatch({ type: GET_GENRES, payload: genres });
+      if (Array.isArray(response.data)) {
+        const genres = response.data.map((genre) => ({
+          id: genre.id,
+          name: genre.name,
+        }));
+
+        dispatch({ type: GET_GENRES, payload: genres });
+      } else {
+        // Manejar la respuesta no válida de la API
+        console.error("La respuesta de la API no es una matriz válida.");
+      }
+    } catch (error) {
+      // Manejar el error de la solicitud
+      console.error("Error al obtener los géneros:", error);
+    }
   };
 };
 export const setGenreFilter = (genre) => {
@@ -62,13 +73,24 @@ export const getGameById = (id) => {
 
 export const getPlatforms = () => {
   return async function (dispatch) {
-    const response = await axios.get("/platforms");
-    const platforms = response.data.map((platform) => ({
-      id: platform.id,
-      name: platform.name,
-    }));
+    try {
+      const response = await axios.get("/platforms");
 
-    dispatch({ type: GET_PLATFORMS, payload: platforms });
+      if (Array.isArray(response.data)) {
+        const platforms = response.data.map((platform) => ({
+          id: platform.id,
+          name: platform.name,
+        }));
+
+        dispatch({ type: GET_PLATFORMS, payload: platforms });
+      } else {
+        // Manejar la respuesta no válida de la API
+        console.error("La respuesta de la API no es una matriz válida.");
+      }
+    } catch (error) {
+      // Manejar el error de la solicitud
+      console.error("Error al obtener las plataformas:", error);
+    }
   };
 };
 export const setPlatformFilter = (platform) => {
