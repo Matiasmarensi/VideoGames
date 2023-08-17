@@ -40,7 +40,7 @@ export const getGenres = () => {
       const response = await axios.get("/genres");
       console.log(response.data);
       if (Array.isArray(response.data)) {
-        const genres = response?.data.map((genre) => ({
+        const genres = response.data.map((genre) => ({
           id: genre.id,
           name: genre.name,
         }));
