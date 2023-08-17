@@ -202,7 +202,7 @@ const CardsContainer = ({ loading }) => {
         <div className={style.cards}>
           {filteredGames !== null && filteredGames.length > 0 ? (
             filteredGames
-              ?.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)
+              .slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)
               .map((game, i) => (
                 <Card
                   key={i}
