@@ -68,11 +68,11 @@ export const getGameById = (id) => {
       const response = await axios.get(`https://videogames-production-74c6.up.railway.app/videogames/${id}`);
       const game = response.data;
 
-      if (Array.isArray(game)) {
+      if (game) {
         dispatch({ type: GET_GAME_BY_ID, payload: game });
       } else {
         // Manejar la respuesta no válida de la API
-        console.log("La respuesta no es una matriz:", game);
+        console.log("La respuesta no es una obj:", game);
       }
     } catch (error) {
       // Manejar el error de la solicitud
@@ -131,7 +131,7 @@ export const sourceFilter = (filterValue) => {
 };
 export const deleteGame = (id) => {
   return async function (dispatch) {
-    await axios.delete(`/videogames/${id}`);
+    await axios.delete(`https://videogames-production-74c6.up.railway.app/videogames/${id}`);
     await dispatch(getGames());
     return dispatch({ type: DELETE_GAME, payload: id });
   };
@@ -140,7 +140,7 @@ export const deleteGame = (id) => {
 export const createVideogame = (newVideogame) => {
   return (dispatch) => {
     axios
-      .post("/videogames", newVideogame)
+      .post("https://videogames-production-74c6.up.railway.app/videogames", newVideogame)
       .then((res) => {
         alert("Videojuego creado");
         dispatch({ type: POST_GAME, payload: newVideogame });
