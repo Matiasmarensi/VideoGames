@@ -40,6 +40,7 @@ export const getGenres = () => {
       const response = await axios.get("https://videogames-production-74c6.up.railway.app/genres");
 
       if (Array.isArray(response.data)) {
+        console.log(response.data);
         const genres = response.data.map((genre) => ({
           id: genre.id,
           name: genre.name,
