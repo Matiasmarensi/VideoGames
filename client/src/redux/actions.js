@@ -48,11 +48,11 @@ export const getGenres = () => {
         dispatch({ type: GET_GENRES, payload: genres });
       } else {
         // Manejar la respuesta no válida de la API
-        console.error("La respuesta de la API no es una matriz válida.");
+        console.log(response.data);
       }
     } catch (error) {
       // Manejar el error de la solicitud
-      console.error("Error al obtener los géneros:", error);
+      console.log("Error al obtener los géneros:", error);
     }
   };
 };
