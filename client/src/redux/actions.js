@@ -64,10 +64,20 @@ export const setGenreFilter = (genre) => {
 };
 export const getGameById = (id) => {
   return async function (dispatch) {
-    const response = await axios.get(`https://videogames-production-74c6.up.railway.app/videogames/${id}`);
-    const game = response.data;
+    try {
+      const response = await axios.get(`https://videogames-production-74c6.up.railway.app/videogames/${id}`);
+      const game = response.data;
 
-    dispatch({ type: GET_GAME_BY_ID, payload: game });
+      if (Array.isArray(game)) {
+        dispatch({ type: GET_GAME_BY_ID, payload: game });
+      } else {
+        // Manejar la respuesta no válida de la API
+        console.log("La respuesta no es una matriz:", game);
+      }
+    } catch (error) {
+      // Manejar el error de la solicitud
+      console.log("Error al obtener el juego por ID:", error);
+    }
   };
 };
 
