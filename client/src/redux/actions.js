@@ -37,7 +37,7 @@ export const getGamesByQuery = (name) => {
 export const getGenres = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get("/genres");
+      const response = await axios.get("https://videogames-production-74c6.up.railway.app/genres");
       console.log(response.data);
       if (Array.isArray(response.data)) {
         const genres = response.data.map((genre) => ({
@@ -64,7 +64,7 @@ export const setGenreFilter = (genre) => {
 };
 export const getGameById = (id) => {
   return async function (dispatch) {
-    const response = await axios.get(`/videogames/${id}`);
+    const response = await axios.get(`https://videogames-production-74c6.up.railway.app/videogames/${id}`);
     const game = response.data;
 
     dispatch({ type: GET_GAME_BY_ID, payload: game });
@@ -74,7 +74,7 @@ export const getGameById = (id) => {
 export const getPlatforms = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get("/platforms");
+      const response = await axios.get("https://videogames-production-74c6.up.railway.app/platforms");
 
       if (Array.isArray(response.data)) {
         const platforms = response.data.map((platform) => ({
