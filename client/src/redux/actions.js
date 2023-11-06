@@ -41,7 +41,7 @@ export const getGenres = () => {
 
       if (Array.isArray(response.data)) {
         console.log(response.data);
-        const genres = response.data.map((genre) => ({
+        const genres = response.data?.map((genre) => ({
           id: genre.id,
           name: genre.name,
         }));
