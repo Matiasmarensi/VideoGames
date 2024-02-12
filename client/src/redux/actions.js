@@ -41,7 +41,7 @@ export const getGenres = () => {
 
       if (Array.isArray(response.data)) {
         console.log(response.data);
-        const genres = response.data?.map((genre) => ({
+        const genres = response?.data?.map((genre) => ({
           id: genre.id,
           name: genre.name,
         }));
@@ -67,7 +67,7 @@ export const getGameById = (id) => {
   return async function (dispatch) {
     try {
       const response = await axios.get(`https://videogames-production-74c6.up.railway.app/videogames/${id}`);
-      const game = response.data;
+      const game = response?.data;
 
       if (game) {
         dispatch({ type: GET_GAME_BY_ID, payload: game });
