@@ -17,14 +17,14 @@ export const UPDATE_GENRES = "UPDATE_GENRES";
 // export const CREATED_BY_ME_FILTER = "CREATED_BY_ME_FILTER";
 export const getGames = () => {
   return async function (dispatch) {
-    const response = await axios.get("https://videogames-production-74c6.up.railway.app/videogames");
+    const response = await axios.get("https://videogames-production-36f5.up.railway.app/videogames");
     const games = response.data;
     dispatch({ type: GET_GAMES, payload: games });
   };
 };
 export const getGamesByQuery = (name) => {
   return async function (dispatch) {
-    const response = await axios.get(`https://videogames-production-74c6.up.railway.app/videogames?name=${name}`);
+    const response = await axios.get(`https://videogames-production-36f5.up.railway.app/videogames?name=${name}`);
     const games = response.data;
 
     if (!Array.isArray(games) || games === null) {
@@ -37,10 +37,9 @@ export const getGamesByQuery = (name) => {
 export const getGenres = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get("https://videogames-production-74c6.up.railway.app/genres");
+      const response = await axios.get("https://videogames-production-36f5.up.railway.app/genres");
 
       if (Array.isArray(response.data)) {
-        console.log(response.data);
         const genres = response?.data?.map((genre) => ({
           id: genre.id,
           name: genre.name,
@@ -66,7 +65,7 @@ export const setGenreFilter = (genre) => {
 export const getGameById = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`https://videogames-production-74c6.up.railway.app/videogames/${id}`);
+      const response = await axios.get(`https://videogames-production-36f5.up.railway.app/${id}`);
       const game = response?.data;
 
       if (game) {
@@ -85,7 +84,7 @@ export const getGameById = (id) => {
 export const getPlatforms = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get("https://videogames-production-74c6.up.railway.app/platforms");
+      const response = await axios.get("https://videogames-production-36f5.up.railway.app/platforms");
 
       if (Array.isArray(response.data)) {
         const platforms = response.data.map((platform) => ({
@@ -132,7 +131,7 @@ export const sourceFilter = (filterValue) => {
 };
 export const deleteGame = (id) => {
   return async function (dispatch) {
-    await axios.delete(`https://videogames-production-74c6.up.railway.app/videogames/${id}`);
+    await axios.delete(`https://videogames-production-36f5.up.railway.app/${id}`);
     await dispatch(getGames());
     return dispatch({ type: DELETE_GAME, payload: id });
   };
@@ -141,7 +140,7 @@ export const deleteGame = (id) => {
 export const createVideogame = (newVideogame) => {
   return (dispatch) => {
     axios
-      .post("https://videogames-production-74c6.up.railway.app/videogames", newVideogame)
+      .post("https://videogames-production-36f5.up.railway.app/videogames", newVideogame)
       .then((res) => {
         alert("Videojuego creado");
         dispatch({ type: POST_GAME, payload: newVideogame });
