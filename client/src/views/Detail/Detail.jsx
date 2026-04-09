@@ -1,8 +1,8 @@
-import axios from "axios";
+
 import { useParams } from "react-router-dom";
 import style from "./Detail.module.css";
 import { useEffect, useState } from "react";
-import { getGameById, getGames } from "../../redux/actions";
+import { getGameById } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Detail = () => {
@@ -76,19 +76,4 @@ const Detail = () => {
 
 export default Detail;
 
-{
-  /* <div className={style.description}>
-  {showFullDescription ? (
-    <div dangerouslySetInnerHTML={{ __html: game.description }}></div>
-  ) : (
-    <div>
-      {game.description?.slice(0, 100)}
-      {!showFullDescription && game.description?.length > 100 && (
-        <button className={style.showMoreButton} onClick={handleShowMore}>
-          Ver más
-        </button>
-      )}
-    </div>
-  )}
-</div> */
-}
+

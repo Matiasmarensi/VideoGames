@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { getGames, getGenres, getPlatforms } from "./redux/actions";
 //////
 function App() {
-  const videoGames = useSelector((state) => state.videoGames);
+ 
   const dispatch = useDispatch();
   const location = useLocation();
   const [loading, setLoading] = useState(true);

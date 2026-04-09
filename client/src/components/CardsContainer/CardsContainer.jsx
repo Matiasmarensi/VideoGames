@@ -1,31 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "../Card/Card";
 
 import style from "./CardsContainer.module.css";
 import {
-  getGamesByQuery,
+  
   setPlatformFilter,
   setGenreFilter,
   orderGames,
   orderGamesRating,
-  getGames,
+  
   sourceFilter,
-  deleteGames,
+  
 } from "../../redux/actions";
 ////////////////////////////////////////////////////////
 const CardsContainer = ({ loading }) => {
-  const games = useSelector((state) => state.videoGames);
+  
   const genres = useSelector((state) => state.genres);
   const platforms = useSelector((state) => state.platforms);
 
   const filteredGames = useSelector((state) => state.filteredGames);
 
   const dispatch = useDispatch();
-  const selectedGenre = useSelector((state) => state.selectedGenre);
+  
   const [orderBy, setOrderBy] = useState("");
-  const [selectedPlatform, setSelectedPlatform] = useState("All");
-  const [search, setSearch] = useState("");
+
+  
   const [source, setSource] = useState("");
   const [page, setPage] = useState(1);
   const itemsPerPage = 15;
@@ -34,25 +34,7 @@ const CardsContainer = ({ loading }) => {
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
-  // const [loading, setLoading] = useState(false);
-  /////////////////////////////////
-  // useEffect(() => {
-  //   setLoading(true);
-  //   if (filteredGames.length > 0) {
-  //     dispatch(getGames())
-  //       .then(() => setLoading(false))
-  //       .catch((error) => {
-  //         setLoading(false);
-  //         console.log("Error:", error);
-  //       });
-  //   }
-  //   setLoading(false);
-  // }, []);
-
-  // useEffect(() => {
-  //   dispatch(sourceFilter(source));
-  // }, [source]);
-
+  
   const handleSourceFilter = (event) => {
     const source = event.target.value;
     dispatch(sourceFilter(source));
@@ -60,14 +42,7 @@ const CardsContainer = ({ loading }) => {
 
     setPage(1);
   };
-  ///////////////////////////////////
-  // useEffect(() => {
-  //   dispatch(getGamesByQuery(search));
-  // }, [search]);
-  //filtro genres
-  // useEffect(() => {
-  //   dispatch(setGenreFilter(selectedGenre));
-  // }, [selectedGenre]);
+  
   const handleGenreChange = (event) => {
     const selected = event.target.value;
     dispatch(setGenreFilter(selected));
@@ -80,10 +55,7 @@ const CardsContainer = ({ loading }) => {
     dispatch(setPlatformFilter(selected));
     setPage(1);
   };
-  //order by name
-  // useEffect(() => {
-  //   dispatch(orderGames(orderBy));
-  // }, [orderBy]);
+  
 
   const handleOrderChange = (event) => {
     const selectedOrder = event.target.value;
@@ -91,11 +63,7 @@ const CardsContainer = ({ loading }) => {
     setOrderBy(selectedOrder);
     setPage(1);
   };
-  // // order by rankig
-  // useEffect(() => {
-  //   dispatch(orderGamesRating(orderBy));
-  // }, [orderBy]);
-
+  
   const handleRatingChange = (event) => {
     const rating = event.target.value;
     dispatch(orderGamesRating(orderBy));

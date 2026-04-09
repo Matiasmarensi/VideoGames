@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 export default function Card(props) {
-  const { id } = useParams();
+  
   const genres = props.genres.join("\n");
   const dispatch = useDispatch();
   const handleDeleteGame = () => {

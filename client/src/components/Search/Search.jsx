@@ -1,5 +1,5 @@
 import style from "./Search.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getGamesByQuery } from "../../redux/actions";
 

@@ -1,21 +1,14 @@
 import style from "./CreateVideogame.module.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { getGenres, getPlatforms, createVideogame, getGames } from "../../redux/actions";
+
+import {   createVideogame } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import validate from "./validate";
 const CreateVideogame = () => {
   const genres = useSelector((state) => state.genres);
   const platforms = useSelector((state) => state.platforms);
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(getGames());
-  //   };
-  // }, []);
-  // useEffect(() => {
-  //   dispatch(getPlatforms());
-  // }, []);
+
   const initialVideogameState = {
     name: "",
     description: "",
