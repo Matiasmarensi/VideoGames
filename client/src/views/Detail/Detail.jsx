@@ -22,15 +22,15 @@ const Detail = () => {
   //         console.log("Error:", error);
   //       });
   //   }, []);
-  useEffect(() => {
-    setLoading(true);
-    dispatch(getGameById(id))
-      .then(() => setLoading(false))
-      .catch((error) => {
-        setLoading(false);
-        console.log("Error:", error);
-      });
-  }, []);
+useEffect(() => {
+  setLoading(true);
+  dispatch(getGameById(id))
+    .then(() => setLoading(false))
+    .catch((error) => {
+      setLoading(false);
+      console.log("Error:", error);
+    });
+}, [dispatch, id]);
 
   // const handleShowMore = () => {
   //   setShowFullDescription(true);
