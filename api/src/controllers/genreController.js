@@ -1,6 +1,8 @@
 const axios = require("axios");
-const { API_KEY, URL } = process.env;
+const { API_KEY } = process.env;
 const { Genre } = require("../db");
+
+const URL=https://api.rawg.io/api/
 
 const getGenres = async () => {
   const existingGenres = await Genre.findAll();
