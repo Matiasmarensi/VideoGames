@@ -6,7 +6,7 @@ import Landing from "./views/Landing/Landing";
 import Detail from "./views/Detail/Detail";
 import CreateVideogame from "./views/CreateVideogame/CreateVideogame";
 import Navbar from "./components/NavBar/NavBar";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { getGames, getGenres, getPlatforms } from "./redux/actions";
 //////

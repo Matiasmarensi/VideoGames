@@ -65,7 +65,7 @@ export const setGenreFilter = (genre) => {
 export const getGameById = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`hhttps://juegosapp.fly.dev/videogames/${id}`);
+      const response = await axios.get(`https://juegosapp.fly.dev/videogames/${id}`);
       const game = response?.data;
 
       if (game) {
